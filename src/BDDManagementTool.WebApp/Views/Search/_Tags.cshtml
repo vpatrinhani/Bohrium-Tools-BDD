@@ -1,0 +1,11 @@
+﻿@model Bohrium.Tools.BDDManagementTool.WebApp.ViewModels.ITaggableViewModel
+
+@if (Model != null && Model.Tags.Any())
+{
+    <div class="tags">
+        @foreach (var tag in Model.Tags)
+        {
+            <code><a href="#">@tag</a></code>
+        }
+    </div>
+}

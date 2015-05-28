@@ -1,0 +1,40 @@
+﻿@model Bohrium.Tools.BDDManagementTool.WebApp.ViewModels.StepDefinitionSearchResultViewModel
+
+<div class="row top-buffer">
+    <div class="panel panel-default stepDefinition-card-border">
+        <div class="panel-heading panel-heading-smaller stepDefinition-card">
+            <div class="row">
+                <div class="col-md-11 text-left">
+                    <h5 title="@Html.DisplayFor(model => model.MethodName)">@Html.DisplayFor(model => model.MethodName)</h5>
+                </div>
+                <div class="col-md-1 text-right">
+                    <a href="@Url.Action("StepDefinition", "Search", new { id = Model.Id })" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="card">
+                <p>
+                    @Html.LabelFor(model => model.MethodSignature): 
+                    @Html.DisplayFor(model => model.MethodSignature)
+                </p>
+    
+                <p>
+                    @Html.LabelFor(model => model.CountUsages):
+    
+                    @if (Model.CountUsages == 0)
+                    {
+                        <span class="alert">@Html.DisplayFor(model => model.CountUsages)</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.CountUsages)
+                    }
+                </p>
+            </div>
+        </div>
+        @Html.Partial("_PanelFooter", Model)
+    </div>
+</div>

@@ -1,0 +1,111 @@
+﻿@using Bohrium.Tools.BDDManagementTool.WebApp.ViewModels
+@model Bohrium.Tools.BDDManagementTool.WebApp.ViewModels.FeatureSearchResultViewModel
+@{
+    ViewBag.Title = "Feature - " + Model.Description;
+}
+
+<h3>@ViewBag.Title</h3>
+
+@if (Model.Background.Any())
+{
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(model => model.Background)</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var statement in Model.Background)
+        {
+            <tr>
+                <td>
+                    <a href="#" class="glyphicon glyphicon-info-sign" 
+                       data-toggle="popover" 
+                       tabindex="0"   
+                       data-trigger="focus" 
+                       data-html="true" 
+                       data-placement="left" 
+                       data-content="<div class='truncate-text'>@(statement.StepDefinitionId != null && Guid.Empty != statement.StepDefinitionId ? Html.ActionLink(statement.StepDefinitionMethodName,statement.StepDefinitionId.ToString(),"step-definition",null,  new { title = statement.StepDefinitionMethodName}).ToString() : "<span class=\"alert\">Step Definition not found!<span>")</div>">
+                    </a>
+                    
+                    <span class="text-info">@statement.Keyword</span> 
+                    <span title="@(statement.StepDefinitionId != null && Guid.Empty != statement.StepDefinitionId ?statement.StepDefinitionMethodName:"There is no Step Definition for this Statement!")" class="@(statement.StepDefinitionId != null && Guid.Empty != statement.StepDefinitionId ?string.Empty:"noStepDefinition-text")">@statement.Description</span>
+                </td>
+            </tr>
+            if (!string.IsNullOrEmpty(statement.MultilineTextParameter))
+            {
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => statement.MultilineTextParameter)
+                        @statement.MultilineTextParameter
+                    </td>
+                </tr>
+            }
+            if (statement.Tables != null && statement.Tables.Any())
+            {
+                foreach (var table in statement.Tables)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => table)
+                        </td>
+                    </tr>
+                }
+            }
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(model => model.Background)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>No backgrounds found.</td></tr>
+        </tbody>
+    </table>
+}
+
+@if (Model.Scenarios.Any())
+{
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(model => model.Scenarios)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var scenario in Model.Scenarios)
+            {
+                <tr>
+                    <td>@Html.ActionLink(scenario.Description, "Scenario", "Search", new {scenario.Id}, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(model => model.Scenarios)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>No scenarios found.</td></tr>
+        </tbody>
+    </table>
+}
+
+<p>
+    @Html.Partial("_Tags", Model)
+</p>
+
+<a href="javascript: window.history.back()">
+    Back
+</a>

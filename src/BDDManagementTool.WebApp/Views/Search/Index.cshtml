@@ -1,0 +1,59 @@
+﻿@using Bohrium.Tools.BDDManagementTool.Constraints.Enumerations;
+@model IEnumerable<Bohrium.Tools.BDDManagementTool.WebApp.ViewModels.BaseSearchResultViewModel>
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+<div class="row" style="margin-bottom: 20px;">
+    @using (Html.BeginForm("Result", "Search", FormMethod.Get))
+    {   
+        <div class="col">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <select name="type" id="type" class="form-control selectTypes">
+                        @foreach (SearchFilterType item in Enum.GetValues(typeof(SearchFilterType)))
+                        {
+                            <option value="@Convert.ToInt32(item)">@item.ToString()</option>
+                        }
+                    </select>
+                </span>
+                <input type="text" name="text" id="text" pattern=".{3,}" required title="Please type at least 3 characters" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">&nbsp;<i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div>
+
+        </div>
+    }
+</div>
+
+<div class="row">
+    @Html.Partial("_SearchResults", Model)
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $(".tags a").on('click', function() {
+                $("#type").val(0);
+                $("#text").val(this.innerText);
+                $("form").submit();
+            });
+
+            $('#accordion').collapse({
+                toggle: false
+            });
+
+            @if (ViewBag.searchType != null && ViewBag.searchText != null)
+            {
+                <text>
+                $("#type").val(@ViewBag.searchType);
+                $("#text").val('@ViewBag.searchText');
+                </text>
+            }
+        });
+    </script>
+    
+}

@@ -1,0 +1,35 @@
+﻿@model Bohrium.Tools.BDDManagementTool.WebApp.ViewModels.ScenarioSearchResultViewModel
+
+<div class="row top-buffer">
+    <div class="panel panel-default scenario-card-border">
+        <div class="panel-heading panel-heading-smaller scenario-card">
+            <div class="row">
+                <div class="col-md-11 text-left">
+                    <h5 title="@Html.DisplayFor(model => model.Description)">@Html.DisplayFor(model => model.Description)</h5>
+                </div>
+                <div class="col-md-1 text-right">
+                    <a href="@Url.Action("Scenario", "Search", new { Model.Id })" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="card">
+                <div>
+                    @Html.LabelFor(model => model.Statements):
+                    @if (Model.Statements.Count == 0)
+                    {
+                        <span class="alert">0</span>
+                    }
+                    else
+                    {
+                        @Model.Statements.Count
+                    }
+                </div>
+                @Html.Partial("_Tags", Model)
+            </div>
+        </div>
+        @Html.Partial("_PanelFooter", Model)
+    </div>
+</div>

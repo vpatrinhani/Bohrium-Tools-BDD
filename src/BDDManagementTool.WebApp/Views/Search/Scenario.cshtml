@@ -1,0 +1,70 @@
+﻿@using Bohrium.Tools.BDDManagementTool.WebApp.Utils
+@model Bohrium.Tools.BDDManagementTool.WebApp.ViewModels.ScenarioSearchResultViewModel
+@{
+    ViewBag.Title = "Scenario - " + Model.Description;
+}
+
+<h3>@ViewBag.Title</h3>
+
+@if (Model.Feature != null)
+{
+    <p>
+        @Html.LabelFor(model => model.Feature):
+        @Html.ActionLink(Model.Feature.Description, "Feature", "Search", new {Model.Feature.Id}, null)
+    </p>
+}
+
+<p>
+    @Html.Partial("_Tags", Model)
+</p>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <td>@Html.LabelFor(model => model.Statements)</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var statement in Model.Statements)
+        {
+            <tr>
+                <td>
+                    <a href="#" class="glyphicon glyphicon-info-sign" 
+                       data-toggle="popover" 
+                       tabindex="0"   
+                       data-trigger="focus" 
+                       data-html="true" 
+                       data-placement="left" 
+                       data-content="<div class='truncate-text'>@(statement.StepDefinitionId != null && Guid.Empty != statement.StepDefinitionId ? Html.ActionLink(statement.StepDefinitionMethodName,statement.StepDefinitionId.ToString(),"step-definition", null, new { title = statement.StepDefinitionMethodName}).ToString() : "<span class=\"alert\">Step Definition not found!<span>")</div>">
+                    </a>
+                    
+                    <span class="text-info">@statement.Keyword</span>
+                    <span title="@(statement.StepDefinitionId != null && Guid.Empty != statement.StepDefinitionId ? statement.StepDefinitionMethodName : "There is no Step Definition for this Statement!")" class="@(statement.StepDefinitionId != null && Guid.Empty != statement.StepDefinitionId ? string.Empty : "noStepDefinition-text")">@statement.Description</span>
+                </td>
+            </tr>
+                    if (!string.IsNullOrEmpty(statement.MultilineTextParameter))
+                    {
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => statement.MultilineTextParameter)
+                        @statement.MultilineTextParameter
+                    </td>
+                </tr>
+                    }
+                    if (statement.Tables != null && statement.Tables.Any())
+                    {
+                        foreach (var table in statement.Tables)
+                        {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => table)
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+<a href="javascript: window.history.back()">
+    Back
+</a>

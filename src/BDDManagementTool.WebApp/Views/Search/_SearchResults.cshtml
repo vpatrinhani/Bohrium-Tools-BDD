@@ -1,0 +1,86 @@
+﻿@using Bohrium.Tools.BDDManagementTool.WebApp.ViewModels
+@model IEnumerable<BaseSearchResultViewModel>
+
+@helper AccordionItem(string title, int flag, IEnumerable<BaseSearchResultViewModel> partialModel)
+{
+    const int take = 1000;
+    int count = partialModel.Count();
+    if (count > 0)
+    {
+        <div class="panel panel-default panel-search-result">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse@(flag)">
+                        <strong>@title</strong> - 
+                        @if (count > take)
+                        {
+                            <span title="@count">@take+</span>
+                        }
+                        else
+                        {
+                            <span>@count</span>
+                        }
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse@(flag)" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div>
+                        @foreach (var item in partialModel.Take(take))
+                        {
+                            @Html.DisplayFor(model => item)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@if (Model != null)
+{
+
+    <fieldset>
+    
+        <div class="panel-group" id="accordion">
+            @{ int total = Model.Count(); }
+
+            @if (total > 1)
+            {
+                <legend>Results (@total items found)</legend>
+            }
+            else if (total == 1)
+            {
+                <legend>A single result found.</legend>
+            }
+            else
+            {
+                <legend>No results found.</legend>
+            }
+
+            @if (Model != null)
+            {
+                //Step Definition
+                var modelStepDefinition = Model.Where(x => x is StepDefinitionSearchResultViewModel).OrderByDescending(x => ((StepDefinitionSearchResultViewModel) x).CountUsages).ToList();
+
+                @AccordionItem("Step Definitions", 1, modelStepDefinition)
+
+                //Statement
+                var modelStatement = Model.Where(x => x is StatementSearchResultViewModel).ToList();
+
+                @AccordionItem("Statements", 2, modelStatement)
+
+                //Scenario
+                var modelScenario = Model.Where(x => x is ScenarioSearchResultViewModel).OrderByDescending(x => ((ScenarioSearchResultViewModel) x).Statements.Count).ToList();
+
+                @AccordionItem("Scenarios", 3, modelScenario)
+
+                //Feature
+                var modelFeature = Model.Where(x => x is FeatureSearchResultViewModel).ToList();
+
+                @AccordionItem("Features", 4, modelFeature)
+            }
+        </div>
+    
+    </fieldset>
+}

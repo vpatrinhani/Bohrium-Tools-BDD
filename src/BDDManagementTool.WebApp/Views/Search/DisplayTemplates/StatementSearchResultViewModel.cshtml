@@ -1,0 +1,52 @@
+﻿@model Bohrium.Tools.BDDManagementTool.WebApp.ViewModels.StatementSearchResultViewModel
+
+<div class="row top-buffer">
+    <div class="panel panel-default statement-card-border">
+        <div class="panel-heading panel-heading-smaller statement-card">
+            <div class="row">
+                <div class="col-md-12 text-left">
+                    <h5 title="@Html.DisplayFor(model => model.Description)">
+                        <strong>@Html.DisplayFor(model => model.Type)</strong>
+                        @Html.DisplayFor(model => model.Description)
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body @(Model.StepDefinitionId != null && Guid.Empty != Model.StepDefinitionId ?string.Empty:"noStepDefinition-bg")">
+            <div class="card">
+                <p>
+                    @Html.LabelFor(model => model.Keyword): 
+                    @Html.DisplayFor(model => model.Keyword)
+                </p>
+    
+                @if (!string.IsNullOrEmpty(Model.ScenarioDescription))
+                {
+                    <p>
+                        @Html.LabelFor(model => model.ScenarioDescription): 
+                        @Html.ActionLink(Model.ScenarioDescription, "Scenario", "Search", new {id = Model.ScenarioId}, null)
+                    </p>
+                }
+    
+                @if (!string.IsNullOrEmpty(Model.StepDefinitionMethodName))
+                {
+                    <p>
+                        @Html.LabelFor(model => model.StepDefinitionMethodName): 
+                        @Html.ActionLink(Model.StepDefinitionMethodName, "StepDefinition", "Search", new {id = Model.StepDefinitionId}, null)
+                    </p>
+                }
+            </div>
+            
+            @if (Model.Tables.Any())
+            {
+                @Html.LabelFor(model => model.Tables)
+                <text>:</text>
+                foreach (var table in Model.Tables)
+                {
+                    @Html.DisplayFor(model => table);
+                }
+            }
+
+        </div>
+        @Html.Partial("_PanelFooter", Model)
+    </div>
+</div>

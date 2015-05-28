@@ -1,0 +1,69 @@
+﻿@model Bohrium.Tools.BDDManagementTool.WebApp.ViewModels.StepDefinitionSearchResultViewModel
+@{
+    ViewBag.Title = "Step Definition - " + Model.MethodName;
+}
+
+<h3>@ViewBag.Title</h3>
+
+<p>
+    @Html.LabelFor(model => model.MethodSignature):
+    @Html.DisplayFor(model => model.MethodSignature)
+</p>
+
+<p>
+    @Html.LabelFor(model => model.CountUsages):
+    
+    @if (Model.CountUsages == 0)
+    {
+        <span class="alert">@Html.DisplayFor(model => model.CountUsages)</span>
+    }
+    else
+    {
+        @Html.DisplayFor(model => model.CountUsages)
+    }
+</p>
+
+
+<fieldset>
+    <legend>@Html.LabelFor(model => model.StepDefinitionTypes)</legend>
+
+    @if (Model.StepDefinitionTypes.Any())
+    {
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Regex Statement</th>
+                    <th>Usages</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var stepDefinitionType in Model.StepDefinitionTypes)
+                {
+                    <tr>
+                        <td><span class="text-info">@stepDefinitionType.Type</span></td>
+                        <td>@stepDefinitionType.RegexStatement</td>
+                        <td>
+                            @if (stepDefinitionType.CountUsages == 0)
+                            {
+                                <span class="alert">@Html.DisplayFor(model => model.CountUsages)</span>
+                            }
+                            else
+                            {
+                                @stepDefinitionType.CountUsages
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No types found.</p>
+    }
+</fieldset>
+
+<a href="javascript: window.history.back()">
+    Back
+</a>

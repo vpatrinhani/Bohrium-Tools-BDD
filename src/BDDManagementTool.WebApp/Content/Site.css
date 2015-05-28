@@ -1,0 +1,153 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input[type="text"].max280,
+input[type="password"].max280 {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+thead {
+    background-color: white !important;
+}
+
+.table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
+    background-color: white !important;
+}
+
+.panel-search-result div.text-right {
+    padding-right: 16px;
+    padding-top: 3px;
+}
+
+.panel-search-result h5 {
+    padding-left: 10px;
+}
+
+.panel-search-result h5, .popover div.truncate-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.panel-search-result .panel-body {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.panel-search-result .panel-body .row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.stepDefinition-card {
+    background-color: #ede1e1 !important;
+}
+
+    .stepDefinition-card div.text-right * {
+        color: #dc8b8b;
+    }
+
+.stepDefinition-card-border {
+    border-color: #dc8b8b !important;
+}
+
+.scenario-card {
+    background-color: #deefdd !important;
+}
+
+    .scenario-card div.text-right * {
+        color: #90d78c;
+    }
+
+.scenario-card-border {
+    border-color: #90d78c !important;
+}
+
+.statement-card {
+    background-color: #a7e3ff !important;
+}
+
+    .statement-card div.text-right * {
+        color: #46b0e1;
+    }
+
+.statement-card-border {
+    border-color: #46b0e1 !important;
+}
+
+.noStepDefinition-bg {
+    background-color: rgba(220, 208, 255, 0.50) !important;
+}
+
+
+.noStepDefinition-text {
+    color: purple !important;
+    font-weight: bold;
+}
+
+
+.feature-card {
+    background-color: #fbfae7 !important;
+}
+
+    .feature-card div.text-right * {
+        color: #d3d08c;
+    }
+
+.feature-card-border {
+    border-color: #d3d08c !important;
+}
+
+.selectTypes {
+    padding: 3px;
+    width: 150px !important;
+}
+
+.panel-heading-smaller {
+    padding: 3px !important;
+}
+
+.top-buffer + .top-buffer {
+    margin-top: 20px;
+}
+
+.detailLink {
+    float: right;
+    position: relative;
+    top: -25px !important;
+    right: 10px;
+}

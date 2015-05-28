@@ -1,0 +1,50 @@
+﻿@model Bohrium.Tools.BDDManagementTool.WebApp.ViewModels.FeatureSearchResultViewModel
+
+<div class="row top-buffer">
+    <div class="panel panel-default feature-card-border">
+        <div class="panel-heading panel-heading-smaller feature-card">
+            <div class="row">
+                <div class="col-md-11 text-left">
+                    <h5 title="@Html.DisplayFor(model => model.Description)">@Html.DisplayFor(model => model.Description)</h5>
+                </div>
+                <div class="col-md-1 text-right">
+                    <a href="@Url.Action("Feature", "Search", new { Model.Id })" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div>
+                <label>Total of Backgrounds:</label>
+                @if (Model.Background.Count == 0)
+                {
+                    <span class="alert">0</span>
+                }
+                else
+                {
+                    @Model.Background.Count
+                }
+            </div>
+
+            <div>
+                <label>Total of Scenarios:</label>
+                @if (Model.Scenarios.Count == 0)
+                {
+                    <span class="alert">0</span>
+                }
+                else
+                {
+                    @Model.Scenarios.Count
+                }
+            </div>
+            
+            <div>
+                <div>
+                    @Html.Partial("_Tags", Model)
+                </div>
+            </div>
+            @Html.Partial("_PanelFooter", Model)
+        </div>
+    </div>
+</div>
