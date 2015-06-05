@@ -4,10 +4,11 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">Any CPU</Platform>
     <BuildFolder>$(MSBuildProjectDirectory)\Build</BuildFolder>
+    <DeployFolder>$(MSBuildProjectDirectory)\deploy</DeployFolder>
     <BuildArtifactsFolder>$(BuildFolder)\BuildArtifacts</BuildArtifactsFolder>
     <DeployArtifactsFolder>$(BuildFolder)\DeployArtifacts</DeployArtifactsFolder>
     <NugetToolFolder>$(MSBuildProjectDirectory)\.nuget</NugetToolFolder>
-    <NuspecFilesFolder>$(BuildFolder)\NuspecFiles</NuspecFilesFolder>
+    <NuspecFilesFolder>$(DeployFolder)\nuget</NuspecFilesFolder>
     <PatternMajorMinorVersion>(\d+)\.(\d+)</PatternMajorMinorVersion>
     <CIBuildNumber Condition=" '$(CIBuildNumber)' == '' ">0</CIBuildNumber>
     <DoxyGenPath>$(BuildFolder)\Doxygen</DoxyGenPath>
