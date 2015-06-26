@@ -36,7 +36,7 @@
   <Target Name="clean" DependsOnTargets="clean-deploy-artifacts;clean-build-artifacts">
   </Target>
 
-  <Target Name="deploy-package">
+  <Target Name="deploy-packages">
 
     <MakeDir Condition="!Exists($(DeployArtifactsFolder))" Directories="$(DeployArtifactsFolder)" />
 
