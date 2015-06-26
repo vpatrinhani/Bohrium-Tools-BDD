@@ -9,10 +9,10 @@
         <description>Bohrium.Tools.SpecflowReportTool</description>
     </metadata>
     <files>
-        <file src="..\..\src\Bohrium.Tools.SpecflowReportTool\bin\Release\Bohrium.Tools.SpecflowReportTool.exe" target="tools\Bohrium.Tools.SpecflowReportTool.exe" />
-        <file src="..\..\src\Bohrium.Tools.SpecflowReportTool\bin\Release\Bohrium.Tools.SpecflowReportTool.exe.config" target="tools\Bohrium.Tools.SpecflowReportTool.exe.config" />
-        <file src="..\..\src\Bohrium.Tools.SpecflowReportTool\bin\Release\Bohrium.Core.dll" target="tools\lib\Bohrium.Core.dll" />
-        <file src="..\..\src\Bohrium.Tools.SpecflowReportTool\bin\Release\ILSpy.Bundle.dll" target="tools\lib\ILSpy.Bundle.dll" />
-        <file src="..\..\src\Bohrium.Tools.SpecflowReportTool\bin\Release\Mono.Cecil.dll" target="tools\lib\Mono.Cecil.dll" />
+        <file src="..\..\src\SpecflowReportTool\bin\Release\Bohrium.Tools.SpecflowReportTool.exe" target="tools\Bohrium.Tools.SpecflowReportTool.exe" />
+        <file src="..\..\src\SpecflowReportTool\bin\Release\Bohrium.Tools.SpecflowReportTool.exe.config" target="tools\Bohrium.Tools.SpecflowReportTool.exe.config" />
+        <file src="..\..\src\SpecflowReportTool\bin\Release\Bohrium.Core.dll" target="tools\lib\Bohrium.Core.dll" />
+        <file src="..\..\src\SpecflowReportTool\bin\Release\ILSpy.Bundle.dll" target="tools\lib\ILSpy.Bundle.dll" />
+        <file src="..\..\src\SpecflowReportTool\bin\Release\Mono.Cecil.dll" target="tools\lib\Mono.Cecil.dll" />
     </files>
 </package>
