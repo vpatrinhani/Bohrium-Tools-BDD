@@ -3,43 +3,19 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">Any CPU</Platform>
-    <BuildFolder>$(MSBuildProjectDirectory)\Build</BuildFolder>
+    <BuildFolder>$(MSBuildProjectDirectory)\build</BuildFolder>
     <DeployFolder>$(MSBuildProjectDirectory)\deploy</DeployFolder>
     <BuildArtifactsFolder>$(BuildFolder)\BuildArtifacts</BuildArtifactsFolder>
     <DeployArtifactsFolder>$(BuildFolder)\DeployArtifacts</DeployArtifactsFolder>
     <NugetToolFolder>$(MSBuildProjectDirectory)\.nuget</NugetToolFolder>
     <NuspecFilesFolder>$(DeployFolder)\nuget</NuspecFilesFolder>
+
     <PatternMajorMinorVersion>(\d+)\.(\d+)</PatternMajorMinorVersion>
+
     <CIBuildNumber Condition=" '$(CIBuildNumber)' == '' ">0</CIBuildNumber>
-    <DoxyGenPath>$(BuildFolder)\Doxygen</DoxyGenPath>
-    <DoxyGenBin>$(DoxyGenPath)\bin</DoxyGenBin>
-    <DoxyGenBaseOutputPath>$(DoxyGenPath)\$(DocsOutputPath)</DoxyGenBaseOutputPath>
-    <DocOutputHtmlPath>$(DoxyGenBaseOutputPath)\html</DocOutputHtmlPath>
   </PropertyGroup>
 
   <Import Project="$(MSBuildProjectDirectory)\packages\MSBuild.Extension.Pack.1.6.0\build\net40\MSBuild.Extension.Pack.targets" />
-
-  <Target Name="generate-docs">
-    
-    <Exec Command='$(DoxyGenPath)\runDoxygen.cmd ' WorkingDirectory='$(DoxyGenPath)' />
-
-  </Target>
-
-  <Target Name="deploy-docs" DependsOnTargets="generate-docs">
-    
-    <Exec Command='$(DoxyGenPath)\runDoxygen.cmd ' WorkingDirectory='$(DoxyGenPath)' />
-
-    <ItemGroup>
-      <DocOutputFilesInclude Include="$(DocOutputHtmlPath)\**" />
-    </ItemGroup>
-
-    <MSBuild.ExtensionPack.Compression.Zip
-                TaskAction="Create"
-                RemoveRoot="$(DoxyGenBaseOutputPath)\html"
-                CompressFiles="@(DocOutputFilesInclude)"
-                ZipFileName="$(DoxyGenBaseOutputPath)\$(DocOutputHtmlZipFileName).zip" />
-
-  </Target>
 
   <Target Name="clean-build-artifacts">
     <ItemGroup>
@@ -60,7 +36,7 @@
   <Target Name="clean" DependsOnTargets="clean-deploy-artifacts;clean-build-artifacts">
   </Target>
 
-  <Target Name="deploy" DependsOnTargets="deploy-compile">
+  <Target Name="deploy-package">
 
     <MakeDir Condition="!Exists($(DeployArtifactsFolder))" Directories="$(DeployArtifactsFolder)" />
 
