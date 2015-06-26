@@ -8,11 +8,15 @@ build_script:
 - msbuild "Bohrium.Tools.BDDManagementTool.msbuild" /t:compile /property:Configuration="Debug" /v:n /maxcpucount /nodeReuse:false
 - msbuild "Bohrium.Tools.SpecflowReportTool.msbuild" /t:compile /property:Configuration="Release" /v:n /maxcpucount /nodeReuse:false
 - msbuild "Bohrium.Tools.BDDManagementTool.msbuild" /t:compile /property:Configuration="Release" /v:n /maxcpucount /nodeReuse:false
-- msbuild "Bohrium.Tools.SpecflowReportTool.msbuild" /t:deploy-packages /property:CI_BUILD_NUMBER="%APPVEYOR_BUILD_NUMBER%" /v:n /maxcpucount /nodeReuse:false
 
-test_script:
+test:
+  assemblies: test\**\*.Test.dll
+  categories:
+    except:
+    - sample
 
 after_test:
+- msbuild "Bohrium.Tools.SpecflowReportTool.msbuild" /t:deploy-packages /property:CI_BUILD_NUMBER="%APPVEYOR_BUILD_NUMBER%" /v:n /maxcpucount /nodeReuse:false
 
 artifacts:
 - path: build\DeployArtifacts\*.nupkg

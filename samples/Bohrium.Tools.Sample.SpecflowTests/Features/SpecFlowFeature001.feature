@@ -1,4 +1,4 @@
-﻿@featureTag
+﻿@sample @featureTag
 Feature: SpecFlowFeature001
 	In order to avoid silly mistakes
 	As a math idiot
