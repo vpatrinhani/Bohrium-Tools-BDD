@@ -23,7 +23,7 @@ artifacts:
 
 deploy:
 - provider: NuGet
-  server: https://www.myget.org/F/bohrium-tools/
+  server: https://www.myget.org/F/bohrium-tools/api/v2
   api_key:
     secure: 8b646fdb-9eb3-4f4c-a517-2ff974a9633d
   skip_symbols: true
