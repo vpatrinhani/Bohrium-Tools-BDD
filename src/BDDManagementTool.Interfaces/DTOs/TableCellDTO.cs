@@ -9,7 +9,7 @@ namespace Bohrium.Tools.BDDManagementTool.Interfaces.DTOs
 {
     public class TableCellDTO : BaseDTO, IIdentifiable
     {
-        public Guid Id { get; set; }
+        public Guid ObjectId { get; set; }
         public Guid ColumnId { get; set; }
         public string Value { get; set; }
     }

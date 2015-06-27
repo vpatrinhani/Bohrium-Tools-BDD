@@ -7,10 +7,10 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
     public interface IScenarioEntity : IBaseEntity, IIdentifiable, IDescriptable, ITaggable
     {
-        Guid Id { get; set; }
+        Guid ObjectId { get; set; }
         string Description { get; set; }
         string[] Tags { get; set; }
-        Guid FeatureId { get; set; } 
+        Guid FeatureObjectId { get; set; } 
         IFeatureEntity Feature { get; set; }
         IList<IStatementEntity> Statements { get; set; }
     }

@@ -126,9 +126,9 @@ namespace Bohrium.Tools.BDDManagementTool.WebApp
         /// </summary>
         protected virtual void Configure()
         {
-            Container.RegisterInstance<IDataContext>(new XmlDataContext(HttpContext.Current.Server.MapPath("~/App_Data/")), new ContainerControlledLifetimeManager());
+            //configureXMLStorage();
+            configureEntityFrameworkStorage();
 
-            Container.RegisterType<ISearchRepository, SearchRepository>();
             Container.RegisterType<ServicesBootstrap, ServicesBootstrap>(new ContainerControlledLifetimeManager());
 
             Container.Resolve<ServicesBootstrap>().Configure();
@@ -140,10 +140,33 @@ namespace Bohrium.Tools.BDDManagementTool.WebApp
 
         #region Private
 
+        private void configureXMLStorage()
+        {
+            Container.RegisterInstance<
+                Bohrium.Tools.BDDManagementTool.Data.XML.XmlDataContext>(
+                    new Bohrium.Tools.BDDManagementTool.Data.XML.XmlDataContext(HttpContext.Current.Server.MapPath("~/App_Data/")),
+                    new Microsoft.Practices.Unity.ContainerControlledLifetimeManager());
+
+            Container.RegisterType<IUnitOfWork, Bohrium.Tools.BDDManagementTool.Data.XML.UnitOfWork>();
+
+            Container.RegisterType<ISearchRepository, Bohrium.Tools.BDDManagementTool.Data.XML.Repository.SearchRepository>();
+        }
+
+        private void configureEntityFrameworkStorage()
+        {
+            Container.RegisterType<
+                Bohrium.Tools.BDDManagementTool.Data.EntityFramework.BDDMgmtDbContext,
+                Bohrium.Tools.BDDManagementTool.Data.EntityFramework.BDDMgmtDbContext>(new Microsoft.Practices.Unity.PerRequestLifetimeManager());
+
+            Container.RegisterType<IUnitOfWork, Bohrium.Tools.BDDManagementTool.Data.EntityFramework.UnitOfWork>();
+
+            Container.RegisterType<ISearchRepository, Bohrium.Tools.BDDManagementTool.Data.EntityFramework.Repository.SearchRepository>();
+        }
+
         private void initializeAutoMapper()
         {
             Mapper.CreateMap<BaseDTO, BaseSearchResultViewModel>()
-                .Ignore(viewModel => viewModel.Id)
+                .Ignore(viewModel => viewModel.ObjectId)
                 .Include<FeatureDTO, FeatureSearchResultViewModel>()
                 .Include<ScenarioDTO, ScenarioSearchResultViewModel>()
                 .Include<StatementDTO, StatementSearchResultViewModel>()
@@ -177,7 +200,7 @@ namespace Bohrium.Tools.BDDManagementTool.WebApp
                 .MapFrom(viewModel => viewModel.StepDefinitionTypes,
                     dto => dto.StepDefinitionTypes.Select(x => new StepDefinitionTypeViewModel()
                     {
-                        Id = x.Id,
+                        ObjectId = x.ObjectId,
                         CountUsages = x.CountUsages,
                         RegexStatement = x.RegexStatement,
                         Type = x.Type

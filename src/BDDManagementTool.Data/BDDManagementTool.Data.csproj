@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Entities\IFeatureEntity.cs" />
     <Compile Include="Entities\IScenarioEntity.cs" />
     <Compile Include="Entities\IStatementEntity.cs" />
@@ -49,11 +50,10 @@
     <Compile Include="Entities\ITableColumnEntity.cs" />
     <Compile Include="Entities\ITableParameterEntity.cs" />
     <Compile Include="Entities\ITableRowEntity.cs" />
-    <Compile Include="IDataContext.cs" />
     <Compile Include="Infrastructure\IBaseEntity.cs" />
+    <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Params\FilterRepoParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\ISearchRepository.cs" />
     <Compile Include="SpecFlowDataNotFoundException.cs" />
   </ItemGroup>

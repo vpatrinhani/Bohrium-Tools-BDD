@@ -7,7 +7,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
     public interface IStepDefinitionEntity : IBaseEntity, IIdentifiable
     {
-        Guid Id { get; set; }
+        Guid ObjectId { get; set; }
         string MethodName { get; set; }
         string MethodSignature { get; set; }
         int CountUsages { get; set; }

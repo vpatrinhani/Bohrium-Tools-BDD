@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDDManagementTool.Constrain
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDDManagementTool.Data.XML", "src\BDDManagementTool.Data.XML\BDDManagementTool.Data.XML.csproj", "{275EDE08-98C6-4738-A5CC-F1A4346891CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDDManagementTool.Data.EntityFramework", "BDDManagementTool.Data.EntityFramework\BDDManagementTool.Data.EntityFramework.csproj", "{4850C056-1857-462E-A32F-24A828B2956B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{275EDE08-98C6-4738-A5CC-F1A4346891CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{275EDE08-98C6-4738-A5CC-F1A4346891CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{275EDE08-98C6-4738-A5CC-F1A4346891CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4850C056-1857-462E-A32F-24A828B2956B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4850C056-1857-462E-A32F-24A828B2956B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4850C056-1857-462E-A32F-24A828B2956B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4850C056-1857-462E-A32F-24A828B2956B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

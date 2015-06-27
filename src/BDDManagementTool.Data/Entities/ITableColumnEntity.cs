@@ -10,7 +10,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
     public interface ITableColumnEntity : IBaseEntity, IIdentifiable
     {
-        Guid Id { get; set; }
+        Guid ObjectId { get; set; }
         string Value { get; set; }
     }
 }

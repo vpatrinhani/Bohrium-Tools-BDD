@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnitOfWork.cs" />
     <Compile Include="Entities\FeatureEntity.cs" />
     <Compile Include="Entities\ScenarioEntity.cs" />
     <Compile Include="Entities\StatementEntity.cs" />

@@ -7,10 +7,10 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML.Entities
 {
     public class ScenarioEntity : BaseEntity, IScenarioEntity
     {
-        public Guid Id { get; set; }
+        public Guid ObjectId { get; set; }
         public string Description { get; set; }
         public string[] Tags { get; set; }
-        public Guid FeatureId { get; set; }
+        public Guid FeatureObjectId { get; set; }
         public IFeatureEntity Feature { get; set; }
         public IList<IStatementEntity> Statements { get; set; }
 

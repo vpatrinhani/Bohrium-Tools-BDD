@@ -7,7 +7,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
     public interface IStatementEntity : IBaseEntity, IIdentifiable, ITypeable, IDescriptable
     {
-        Guid Id { get; set; }
+        Guid ObjectId { get; set; }
         string Description { get; set; }
         string Type { get; set; }
         string Keyword { get; set; }

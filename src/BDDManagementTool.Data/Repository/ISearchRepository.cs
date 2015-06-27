@@ -6,7 +6,7 @@ using Bohrium.Tools.BDDManagementTool.Data.Repository.Params;
 
 namespace Bohrium.Tools.BDDManagementTool.Data.Repository
 {
-    public interface ISearchRepository
+    public interface ISearchRepository : IRepository
     {
         IEnumerable<IBaseEntity> Search(FilterRepoParam[] filters);
 

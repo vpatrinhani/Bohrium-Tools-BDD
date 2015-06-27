@@ -7,7 +7,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML.Entities
 {
     public class StatementEntity : BaseEntity, IStatementEntity
     {
-        public Guid Id { get; set; }
+        public Guid ObjectId { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
         public string Keyword { get; set; }

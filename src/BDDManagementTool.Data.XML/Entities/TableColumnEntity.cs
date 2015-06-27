@@ -6,7 +6,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML.Entities
 {
     public class TableColumnEntity : BaseEntity, ITableColumnEntity
     {
-        public Guid Id { get; set; }
+        public Guid ObjectId { get; set; }
         public string Value { get; set; }
     }
 }

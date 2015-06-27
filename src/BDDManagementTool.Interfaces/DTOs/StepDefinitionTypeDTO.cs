@@ -5,7 +5,7 @@ namespace Bohrium.Tools.BDDManagementTool.Interfaces.DTOs
 {
     public class StepDefinitionTypeDTO : BaseDTO, IIdentifiable, ITypeable
     {
-        public Guid Id { get; set; }
+        public Guid ObjectId { get; set; }
         public string Type { get; set; }
         public Guid StepDefinitionId { get; set; }
         public StepDefinitionDTO StepDefinition { get; set; }

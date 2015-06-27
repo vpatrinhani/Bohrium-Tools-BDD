@@ -6,7 +6,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
     public interface IStepDefinitionTypeEntity : IBaseEntity, IIdentifiable, ITypeable
     {
-        Guid Id { get; set; }
+        Guid ObjectId { get; set; }
         string Type { get; set; }
         Guid StepDefinitionId { get; set; }
         IStepDefinitionEntity StepDefinition { get; set; }

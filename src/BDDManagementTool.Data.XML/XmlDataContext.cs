@@ -12,7 +12,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
     /// <summary>
     /// Xml Data Context to provide data from XML files.
     /// </summary>
-    public class XmlDataContext : IDataContext
+    public class XmlDataContext
     {
         #region [Properties]
 
@@ -121,7 +121,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                         var featuresQuery = from feature in xDocument.Root.Descendants("Feature")
                                             select new FeatureEntity()
                                             {
-                                                Id = Guid.Parse(feature.Attribute("ObjectId").Value),
+                                                ObjectId = Guid.Parse(feature.Attribute("ObjectId").Value),
                                                 Description = feature.Attribute("Description").Value,
                                                 Tags = (from tag in feature.Elements("Tags").Elements("Tag")
                                                         select tag.Value).ToArray()
@@ -136,7 +136,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                             foreach (var statementNode in backgroundNode.Descendants("Statements").Elements("Statement"))
                             {
                                 var statementEntity = new StatementEntity();
-                                statementEntity.Id = Guid.Parse(statementNode.Attribute("ObjectId").Value);
+                                statementEntity.ObjectId = Guid.Parse(statementNode.Attribute("ObjectId").Value);
                                 statementEntity.Description = statementNode.Attribute("Statement").Value;
                                 statementEntity.Keyword = statementNode.Attribute("Keyword").Value;
                                 statementEntity.Type = statementNode.Attribute(XName.Get("type", xsi)).Value;
@@ -156,7 +156,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                         foreach (var stepDefinitionTypeReferenceNode in typeReferenceNode.Descendants("StepDefinitionTypeReference"))
                                         {
                                             var stepDefinitionTypeEntity = new StepDefinitionTypeEntity();
-                                            stepDefinitionTypeEntity.Id = Guid.Parse(stepDefinitionTypeReferenceNode.Attribute("StepDefinitionTypeId").Value);
+                                            stepDefinitionTypeEntity.ObjectId = Guid.Parse(stepDefinitionTypeReferenceNode.Attribute("StepDefinitionTypeId").Value);
 
                                             statementEntity.StepDefinitionTypes.Add(stepDefinitionTypeEntity);
                                         }
@@ -166,8 +166,8 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                 foreach (var tableParameterNode in statementNode.Elements("TableParameter"))
                                 {
                                     var tableEntity = new TableParameterEntity();
-                                    tableEntity.Id = Guid.Parse(tableParameterNode.Attribute("ObjectId").Value);
-                                    tableEntity.StatementId = statementEntity.Id;
+                                    tableEntity.ObjectId = Guid.Parse(tableParameterNode.Attribute("ObjectId").Value);
+                                    tableEntity.StatementId = statementEntity.ObjectId;
 
                                     var headerNode = tableParameterNode.Element("Header");
                                     if (headerNode != null)
@@ -175,7 +175,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                         foreach (var columnNode in headerNode.Element("Columns").Elements("Column"))
                                         {
                                             var columnEntity = new TableColumnEntity();
-                                            columnEntity.Id = Guid.Parse(columnNode.Attribute("ObjectId").Value);
+                                            columnEntity.ObjectId = Guid.Parse(columnNode.Attribute("ObjectId").Value);
                                             columnEntity.Value = columnNode.Attribute("Value").Value;
 
                                             tableEntity.Columns.Add(columnEntity);
@@ -194,7 +194,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                             foreach (var cellNode in rowNode.Elements("Cells").Elements("Cell"))
                                             {
                                                 var cellEntity = new TableCellEntity();
-                                                cellEntity.Id = Guid.Parse(cellNode.Attribute("ObjectId").Value);
+                                                cellEntity.ObjectId = Guid.Parse(cellNode.Attribute("ObjectId").Value);
                                                 cellEntity.ColumnId = Guid.Parse(cellNode.Attribute("HeaderColumnId").Value);
                                                 cellEntity.Value = cellNode.Attribute("Value").Value;
 
@@ -229,8 +229,8 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                         foreach (var scenarioNode in xDocument.Root.Descendants("Scenario").AsParallel())
                         {
                             var scenarioEntity = new ScenarioEntity();
-                            scenarioEntity.Id = Guid.Parse(scenarioNode.Attribute("ObjectId").Value);
-                            scenarioEntity.FeatureId = Guid.Parse(scenarioNode.Attribute("ParentFeature").Value);
+                            scenarioEntity.ObjectId = Guid.Parse(scenarioNode.Attribute("ObjectId").Value);
+                            scenarioEntity.FeatureObjectId = Guid.Parse(scenarioNode.Attribute("ParentFeature").Value);
                             scenarioEntity.Description = scenarioNode.Attribute("Description").Value;
                             scenarioEntity.Tags = scenarioNode.Elements("Tags").Elements("Tag").Select(tag => tag.Value).ToArray();
 
@@ -238,11 +238,11 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                             foreach (var statementNode in scenarioNode.Elements("Statements").Elements("Statement"))
                             {
                                 var statementEntity = new StatementEntity();
-                                statementEntity.Id = Guid.Parse(statementNode.Attribute("ObjectId").Value);
+                                statementEntity.ObjectId = Guid.Parse(statementNode.Attribute("ObjectId").Value);
                                 statementEntity.Description = statementNode.Attribute("Statement").Value;
                                 statementEntity.Keyword = statementNode.Attribute("Keyword").Value;
                                 statementEntity.Type = statementNode.Attribute(XName.Get("type", xsi)).Value;
-                                statementEntity.ScenarioId = scenarioEntity.Id;
+                                statementEntity.ScenarioId = scenarioEntity.ObjectId;
 
                                 var multilineTextParameterNode = statementNode.Element("MultilineTextParameter");
                                 if (multilineTextParameterNode != null)
@@ -258,7 +258,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                         foreach (var stepDefinitionTypeReferenceNode in typeReferenceNode.Descendants("StepDefinitionTypeReference"))
                                         {
                                             var stepDefinitionTypeEntity = new StepDefinitionTypeEntity();
-                                            stepDefinitionTypeEntity.Id = Guid.Parse(stepDefinitionTypeReferenceNode.Attribute("StepDefinitionTypeId").Value);
+                                            stepDefinitionTypeEntity.ObjectId = Guid.Parse(stepDefinitionTypeReferenceNode.Attribute("StepDefinitionTypeId").Value);
 
                                             statementEntity.StepDefinitionTypes.Add(stepDefinitionTypeEntity);
                                         }
@@ -268,8 +268,8 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                 foreach (var tableParameterNode in statementNode.Elements("TableParameter"))
                                 {
                                     var tableEntity = new TableParameterEntity();
-                                    tableEntity.Id = Guid.Parse(tableParameterNode.Attribute("ObjectId").Value);
-                                    tableEntity.StatementId = statementEntity.Id;
+                                    tableEntity.ObjectId = Guid.Parse(tableParameterNode.Attribute("ObjectId").Value);
+                                    tableEntity.StatementId = statementEntity.ObjectId;
 
                                     var headerNode = tableParameterNode.Element("Header");
                                     if (headerNode != null)
@@ -277,7 +277,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                         foreach (var columnNode in headerNode.Element("Columns").Elements("Column"))
                                         {
                                             var columnEntity = new TableColumnEntity();
-                                            columnEntity.Id = Guid.Parse(columnNode.Attribute("ObjectId").Value);
+                                            columnEntity.ObjectId = Guid.Parse(columnNode.Attribute("ObjectId").Value);
                                             columnEntity.Value = columnNode.Attribute("Value").Value;
 
                                             tableEntity.Columns.Add(columnEntity);
@@ -296,7 +296,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                             foreach (var cellNode in rowNode.Elements("Cells").Elements("Cell"))
                                             {
                                                 var cellEntity = new TableCellEntity();
-                                                cellEntity.Id = Guid.Parse(cellNode.Attribute("ObjectId").Value);
+                                                cellEntity.ObjectId = Guid.Parse(cellNode.Attribute("ObjectId").Value);
                                                 cellEntity.ColumnId = Guid.Parse(cellNode.Attribute("HeaderColumnId").Value);
                                                 cellEntity.Value = cellNode.Attribute("Value").Value;
 
@@ -334,7 +334,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                             foreach (var stepDefinitionNode in stepDefinitionsNode.Elements("StepDefinition").AsParallel())
                             {
                                 var stepDefinitionEntity = new StepDefinitionEntity();
-                                stepDefinitionEntity.Id = Guid.Parse(stepDefinitionNode.Attribute("ObjectId").Value);
+                                stepDefinitionEntity.ObjectId = Guid.Parse(stepDefinitionNode.Attribute("ObjectId").Value);
                                 stepDefinitionEntity.MethodName = stepDefinitionNode.Attribute("StepDefinitionMethodName").Value;
                                 stepDefinitionEntity.MethodSignature = stepDefinitionNode.Attribute("StepDefinitionMethodSignature").Value;
                                 stepDefinitionEntity.CountUsages = int.Parse(stepDefinitionNode.Attribute("CountUsages").Value);
@@ -345,7 +345,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                     {
                                         var stepDefinitionTypeEntity = new StepDefinitionTypeEntity();
 
-                                        stepDefinitionTypeEntity.Id = Guid.Parse(stepDefinitionTypeNode.Attribute("ObjectId").Value);
+                                        stepDefinitionTypeEntity.ObjectId = Guid.Parse(stepDefinitionTypeNode.Attribute("ObjectId").Value);
                                         stepDefinitionTypeEntity.StepDefinitionId = Guid.Parse(stepDefinitionTypeNode.Attribute("ParentStepDefinitionId").Value);
                                         stepDefinitionTypeEntity.RegexStatement = stepDefinitionTypeNode.Attribute("RegexExpression").Value;
                                         stepDefinitionTypeEntity.CountUsages = int.Parse(stepDefinitionTypeNode.Attribute("CountUsages").Value);
@@ -370,38 +370,38 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
 
             foreach (var statementEntity in tempStatementEntities.AsParallel())
             {
-                var stepDefinitionTypeIds = statementEntity.StepDefinitionTypes.Select(x => x.Id);
-                statementEntity.StepDefinitionTypes = tempStepDefinitionTypesEntities.Where(x => stepDefinitionTypeIds.Contains(x.Id)).ToList();
+                var stepDefinitionTypeIds = statementEntity.StepDefinitionTypes.Select(x => x.ObjectId);
+                statementEntity.StepDefinitionTypes = tempStepDefinitionTypesEntities.Where(x => stepDefinitionTypeIds.Contains(x.ObjectId)).ToList();
 
-                statementEntity.Scenario = tempScenariosEntities.FirstOrDefault(x => x.Id == statementEntity.ScenarioId);
-                statementEntity.Feature = tempFeaturesEntities.FirstOrDefault(x => x.Id == statementEntity.ScenarioId);
-                statementEntity.StepDefinition = tempStepDefinitionEntities.FirstOrDefault(x => x.Id == statementEntity.StepDefinitionId);
+                statementEntity.Scenario = tempScenariosEntities.FirstOrDefault(x => x.ObjectId == statementEntity.ScenarioId);
+                statementEntity.Feature = tempFeaturesEntities.FirstOrDefault(x => x.ObjectId == statementEntity.ScenarioId);
+                statementEntity.StepDefinition = tempStepDefinitionEntities.FirstOrDefault(x => x.ObjectId == statementEntity.StepDefinitionId);
 
-                var feature = tempFeaturesEntities.FirstOrDefault(x => x.Id == statementEntity.FeatureId);
+                var feature = tempFeaturesEntities.FirstOrDefault(x => x.ObjectId == statementEntity.FeatureId);
                 if (feature != null)
                 {
                     statementEntity.Feature = feature;
-                    feature.Background = tempStatementEntities.Where(x => x.FeatureId == feature.Id).ToList();
+                    feature.Background = tempStatementEntities.Where(x => x.FeatureId == feature.ObjectId).ToList();
                 }
             }
 
             foreach (var tableParameterEntity in tempTableEntities.AsParallel())
-                tableParameterEntity.Statement = tempStatementEntities.FirstOrDefault(x => x.Id == tableParameterEntity.StatementId);
+                tableParameterEntity.Statement = tempStatementEntities.FirstOrDefault(x => x.ObjectId == tableParameterEntity.StatementId);
 
             foreach (var scenarioEntity in tempScenariosEntities.AsParallel())
             {
-                scenarioEntity.Statements = tempStatementEntities.Where(x => x.ScenarioId == scenarioEntity.Id).ToList();
+                scenarioEntity.Statements = tempStatementEntities.Where(x => x.ScenarioId == scenarioEntity.ObjectId).ToList();
 
-                var feature = tempFeaturesEntities.FirstOrDefault(x => x.Id == scenarioEntity.FeatureId);
+                var feature = tempFeaturesEntities.FirstOrDefault(x => x.ObjectId == scenarioEntity.FeatureObjectId);
                 if (feature != null)
                 {
                     scenarioEntity.Feature = feature;
-                    feature.Scenarios = tempScenariosEntities.Where(x => x.FeatureId == feature.Id).ToList();
+                    feature.Scenarios = tempScenariosEntities.Where(x => x.FeatureObjectId == feature.ObjectId).ToList();
                 }
             }
 
             foreach (var stepDefinitionTypeEntity in tempStepDefinitionTypesEntities.AsParallel())
-                stepDefinitionTypeEntity.StepDefinition = tempStepDefinitionEntities.FirstOrDefault(x => x.Id == stepDefinitionTypeEntity.Id);
+                stepDefinitionTypeEntity.StepDefinition = tempStepDefinitionEntities.FirstOrDefault(x => x.ObjectId == stepDefinitionTypeEntity.ObjectId);
 
             #endregion [Join types for navigation]
 

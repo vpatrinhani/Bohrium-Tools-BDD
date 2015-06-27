@@ -9,7 +9,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
     public interface ITableParameterEntity : IBaseEntity
     {
-        Guid Id { get; set; }
+        Guid ObjectId { get; set; }
         Guid StatementId { get; set; }
         IStatementEntity Statement { get; set; }
         IList<ITableColumnEntity> Columns { get; set; }
