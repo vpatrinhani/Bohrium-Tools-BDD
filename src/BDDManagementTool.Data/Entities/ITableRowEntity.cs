@@ -7,13 +7,8 @@ using Bohrium.Tools.BDDManagementTool.Data.Infrasctructure;
 
 namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
-    public class TableRowEntity : BaseEntity
+    public interface ITableRowEntity : IBaseEntity
     {
-        public List<TableCellEntity> Cells { get; set; }
-
-        public TableRowEntity()
-        {
-            Cells = new List<TableCellEntity>();
-        }
+        IList<ITableCellEntity> Cells { get; set; }
     }
 }

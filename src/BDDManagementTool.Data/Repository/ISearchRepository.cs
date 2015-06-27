@@ -8,10 +8,10 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Repository
 {
     public interface ISearchRepository
     {
-        IEnumerable<BaseEntity> Search(FilterRepoParam[] filters);
+        IEnumerable<IBaseEntity> Search(FilterRepoParam[] filters);
 
-        FeatureEntity GetFeatureById(Guid id);
-        ScenarioEntity GetScenarioById(Guid id);
-        StepDefinitionEntity GetStepDefinitionById(Guid id);
+        IFeatureEntity GetFeatureById(Guid id);
+        IScenarioEntity GetScenarioById(Guid id);
+        IStepDefinitionEntity GetStepDefinitionById(Guid id);
     }
 }

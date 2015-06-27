@@ -1,14 +1,15 @@
-﻿using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Collections;
-using System.Collections.Generic;
-using System;
-using Bohrium.Tools.BDDManagementTool.Data.Infrasctructure;
-using Bohrium.Tools.BDDManagementTool.Data.Repository.Params;
-using Bohrium.Tools.BDDManagementTool.Constraints.Enumerations;
+﻿using Bohrium.Tools.BDDManagementTool.Constraints.Enumerations;
 using Bohrium.Tools.BDDManagementTool.Data.Entities;
+using Bohrium.Tools.BDDManagementTool.Data.Infrasctructure;
+using Bohrium.Tools.BDDManagementTool.Data.Repository;
+using Bohrium.Tools.BDDManagementTool.Data.Repository.Params;
+using Bohrium.Tools.BDDManagementTool.Data.XML.Entities;
+using Bohrium.Tools.BDDManagementTool.Data.XML.Infrasctructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Bohrium.Tools.BDDManagementTool.Data.Repository
+namespace Bohrium.Tools.BDDManagementTool.Data.XML.Repository
 {
     public class SearchRepository : BaseRepository, ISearchRepository
     {
@@ -17,9 +18,9 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Repository
         {
         }
 
-        public virtual IEnumerable<BaseEntity> Search(FilterRepoParam[] filters)
+        public virtual IEnumerable<IBaseEntity> Search(FilterRepoParam[] filters)
         {
-            List<BaseEntity> returnedItems = new List<BaseEntity>();
+            List<IBaseEntity> returnedItems = new List<IBaseEntity>();
             foreach (var filter in filters)
             {
                 filter.Text = filter.Text.ToLower();
@@ -28,24 +29,31 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Repository
                     case SearchFilterType.Feature:
                         returnedItems.AddRange(SearchByFeature(filter.Text));
                         break;
+
                     case SearchFilterType.Scenario:
                         returnedItems.AddRange(SearchByScenario(filter.Text));
                         break;
+
                     case SearchFilterType.StepDefinition:
                         returnedItems.AddRange(SearchByStepDefinition(filter.Text));
                         break;
+
                     case SearchFilterType.Given:
                         returnedItems.AddRange(SearchByGiven(filter.Text));
                         break;
+
                     case SearchFilterType.When:
                         returnedItems.AddRange(SearchByWhen(filter.Text));
                         break;
+
                     case SearchFilterType.Then:
                         returnedItems.AddRange(SearchByThen(filter.Text));
                         break;
+
                     case SearchFilterType.Tag:
                         returnedItems.AddRange(SearchByTag(filter.Text));
                         break;
+
                     case SearchFilterType.All:
                         returnedItems.AddRange(SearchByAll(filter.Text));
                         break;
@@ -55,67 +63,67 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Repository
             return returnedItems;
         }
 
-        public FeatureEntity GetFeatureById(Guid id)
+        public IFeatureEntity GetFeatureById(Guid id)
         {
             return this.DataContext.Features.FirstOrDefault(x => x.Id == id);
         }
 
-        public ScenarioEntity GetScenarioById(Guid id)
+        public IScenarioEntity GetScenarioById(Guid id)
         {
             return this.DataContext.Scenarios.FirstOrDefault(x => x.Id == id);
         }
 
-        public StepDefinitionEntity GetStepDefinitionById(Guid id)
+        public IStepDefinitionEntity GetStepDefinitionById(Guid id)
         {
             return this.DataContext.StepDefinitions.FirstOrDefault(x => x.Id == id);
         }
 
-        private IEnumerable<BaseEntity> SearchByStepDefinition(string filterText)
+        private IEnumerable<IBaseEntity> SearchByStepDefinition(string filterText)
         {
             return this.DataContext.StepDefinitions.Where(i => i.MethodName.ToLower().Contains(filterText)).ToList();
         }
 
-        private IEnumerable<BaseEntity> SearchByScenario(string filterText)
+        private IEnumerable<IBaseEntity> SearchByScenario(string filterText)
         {
             return this.DataContext.Scenarios.Where(i => i.Description.ToLower().Contains(filterText)).ToList();
         }
 
-        private IEnumerable<FeatureEntity> SearchByFeature(string filterText)
+        private IEnumerable<IFeatureEntity> SearchByFeature(string filterText)
         {
             return this.DataContext.Features.Where(i => i.Description.ToLower().Contains(filterText)).ToList();
         }
 
-        private IEnumerable<StatementEntity> SearchByGiven(string filterText)
+        private IEnumerable<IStatementEntity> SearchByGiven(string filterText)
         {
-            return this.DataContext.Statements.Where(i => i.Type.ToLower() == "given" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Exists(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+            return this.DataContext.Statements.Where(i => i.Type.ToLower() == "given" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
         }
 
-        private IEnumerable<StatementEntity> SearchByWhen(string filterText)
+        private IEnumerable<IStatementEntity> SearchByWhen(string filterText)
         {
-            return this.DataContext.Statements.Where(i => i.Type.ToLower() == "when" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Exists(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+            return this.DataContext.Statements.Where(i => i.Type.ToLower() == "when" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
         }
 
-        private IEnumerable<StatementEntity> SearchByThen(string filterText)
+        private IEnumerable<IStatementEntity> SearchByThen(string filterText)
         {
-            return this.DataContext.Statements.Where(i => i.Type.ToLower() == "then" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Exists(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+            return this.DataContext.Statements.Where(i => i.Type.ToLower() == "then" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
         }
 
-        private IEnumerable<BaseEntity> SearchByTag(string filterText)
+        private IEnumerable<IBaseEntity> SearchByTag(string filterText)
         {
-            List<BaseEntity> returnedItems = new List<BaseEntity>();
+            List<IBaseEntity> returnedItems = new List<IBaseEntity>();
 
             //Load Features
             returnedItems.AddRange(this.DataContext.Features.Where(i => i.Tags.ToList<string>().Exists(s => s.ToLower().Contains(filterText))));
-            
+
             //Load Scenarios
             returnedItems.AddRange(this.DataContext.Scenarios.Where(i => i.Tags.ToList<string>().Exists(s => s.ToLower().Contains(filterText))));
-            
+
             return returnedItems;
         }
 
-        private IEnumerable<BaseEntity> SearchByAll(string filterText)
+        private IEnumerable<IBaseEntity> SearchByAll(string filterText)
         {
-            List<BaseEntity> returnedItems = new List<BaseEntity>();
+            List<IBaseEntity> returnedItems = new List<IBaseEntity>();
 
             returnedItems.AddRange(SearchByScenario(filterText));
             returnedItems.AddRange(SearchByFeature(filterText));

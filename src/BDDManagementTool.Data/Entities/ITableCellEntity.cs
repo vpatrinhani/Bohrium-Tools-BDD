@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
-    public class TableCellEntity : BaseEntity, IIdentifiable
+    public interface ITableCellEntity : IBaseEntity, IIdentifiable
     {
-        public Guid Id { get; set; }
-        public Guid ColumnId { get; set; }
-        public string Value { get; set; }
+        Guid Id { get; set; }
+        Guid ColumnId { get; set; }
+        string Value { get; set; }
     }
 }

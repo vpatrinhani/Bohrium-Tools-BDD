@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bohrium.Tools.BDDManagementTool.Data.Infrasctructure
 {
-    public abstract class BaseEntity
+    public interface IBaseEntity
     {
     }
 }

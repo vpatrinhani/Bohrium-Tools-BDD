@@ -10,23 +10,23 @@ namespace Bohrium.Tools.BDDManagementTool.Data
     /// </summary>
     public interface IDataContext
     {
-        IQueryable<FeatureEntity> Features { get; }
+        IQueryable<IFeatureEntity> Features { get; }
 
-        IQueryable<ScenarioEntity> Scenarios { get; }
+        IQueryable<IScenarioEntity> Scenarios { get; }
 
-        IQueryable<StatementEntity> Statements { get; }
+        IQueryable<IStatementEntity> Statements { get; }
 
-        IQueryable<StepDefinitionEntity> StepDefinitions { get; }
+        IQueryable<IStepDefinitionEntity> StepDefinitions { get; }
 
-        IQueryable<StepDefinitionTypeEntity> StepDefinitionTypes { get; }
+        IQueryable<IStepDefinitionTypeEntity> StepDefinitionTypes { get; }
 
-        IQueryable<TableParameterEntity> Tables { get; }
+        IQueryable<ITableParameterEntity> Tables { get; }
 
-        IQueryable<TableColumnEntity> TableColumns { get; }
+        IQueryable<ITableColumnEntity> TableColumns { get; }
 
-        IQueryable<TableRowEntity> TableRows { get; }
+        IQueryable<ITableRowEntity> TableRows { get; }
 
-        IQueryable<TableCellEntity> TableCells { get; }
+        IQueryable<ITableCellEntity> TableCells { get; }
     }
 }
 

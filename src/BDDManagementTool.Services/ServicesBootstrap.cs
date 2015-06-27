@@ -33,7 +33,6 @@ namespace Bohrium.Tools.BDDManagementTool.Services
 
         private void configureContainer()
         {
-            this.container.RegisterType<ISearchRepository, SearchRepository>();
             this.container.RegisterType<ISearchService, SearchService>();
         }
 
@@ -41,26 +40,26 @@ namespace Bohrium.Tools.BDDManagementTool.Services
         {
             Mapper.CreateMap<FilterRepoParamDTO, FilterRepoParam>();
 
-            Mapper.CreateMap<FeatureEntity, FeatureDTO>();
-            Mapper.CreateMap<ScenarioEntity, ScenarioDTO>();
-            Mapper.CreateMap<StatementEntity, StatementDTO>();
-            Mapper.CreateMap<StepDefinitionEntity, StepDefinitionDTO>();
-            Mapper.CreateMap<StepDefinitionTypeEntity, StepDefinitionTypeDTO>();
-            Mapper.CreateMap<TableCellEntity, TableCellDTO>();
-            Mapper.CreateMap<TableColumnEntity, TableColumnDTO>();
-            Mapper.CreateMap<TableParameterEntity, TableParameterDTO>();
-            Mapper.CreateMap<TableRowEntity, TableRowDTO>();
+            Mapper.CreateMap<IFeatureEntity, FeatureDTO>();
+            Mapper.CreateMap<IScenarioEntity, ScenarioDTO>();
+            Mapper.CreateMap<IStatementEntity, StatementDTO>();
+            Mapper.CreateMap<IStepDefinitionEntity, StepDefinitionDTO>();
+            Mapper.CreateMap<IStepDefinitionTypeEntity, StepDefinitionTypeDTO>();
+            Mapper.CreateMap<ITableCellEntity, TableCellDTO>();
+            Mapper.CreateMap<ITableColumnEntity, TableColumnDTO>();
+            Mapper.CreateMap<ITableParameterEntity, TableParameterDTO>();
+            Mapper.CreateMap<ITableRowEntity, TableRowDTO>();
 
-            Mapper.CreateMap<BaseEntity, BaseDTO>()
-                .Include<FeatureEntity, FeatureDTO>()
-                .Include<ScenarioEntity, ScenarioDTO>()
-                .Include<StatementEntity, StatementDTO>()
-                .Include<StepDefinitionEntity, StepDefinitionDTO>()
-                .Include<StepDefinitionTypeEntity, StepDefinitionTypeDTO>()
-                .Include<TableCellEntity, TableCellDTO>()
-                .Include<TableColumnEntity, TableColumnDTO>()
-                .Include<TableParameterEntity, TableParameterDTO>()
-                .Include<TableRowEntity, TableRowDTO>();
+            Mapper.CreateMap<IBaseEntity, BaseDTO>()
+                .Include<IFeatureEntity, FeatureDTO>()
+                .Include<IScenarioEntity, ScenarioDTO>()
+                .Include<IStatementEntity, StatementDTO>()
+                .Include<IStepDefinitionEntity, StepDefinitionDTO>()
+                .Include<IStepDefinitionTypeEntity, StepDefinitionTypeDTO>()
+                .Include<ITableCellEntity, TableCellDTO>()
+                .Include<ITableColumnEntity, TableColumnDTO>()
+                .Include<ITableParameterEntity, TableParameterDTO>()
+                .Include<ITableRowEntity, TableRowDTO>();
         }
     }
 }

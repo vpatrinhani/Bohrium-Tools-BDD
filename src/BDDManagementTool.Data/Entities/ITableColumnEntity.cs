@@ -8,9 +8,9 @@ using Bohrium.Tools.BDDManagementTool.Data.Infrasctructure;
 
 namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
-    public class TableColumnEntity : BaseEntity, IIdentifiable
+    public interface ITableColumnEntity : IBaseEntity, IIdentifiable
     {
-        public Guid Id { get; set; }
-        public string Value { get; set; }
+        Guid Id { get; set; }
+        string Value { get; set; }
     }
 }

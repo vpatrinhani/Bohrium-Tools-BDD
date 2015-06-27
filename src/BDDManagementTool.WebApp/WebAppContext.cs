@@ -10,6 +10,9 @@ using Bohrium.Tools.BDDManagementTool.Services;
 using Bohrium.Tools.BDDManagementTool.WebApp.App_Start;
 using Bohrium.Tools.BDDManagementTool.WebApp.ViewModels;
 using Bohrium.Tools.BDDManagementTool.WebApp.Utils;
+using Bohrium.Tools.BDDManagementTool.Data.XML;
+using Bohrium.Tools.BDDManagementTool.Data.Repository;
+using Bohrium.Tools.BDDManagementTool.Data.XML.Repository;
 
 namespace Bohrium.Tools.BDDManagementTool.WebApp
 {
@@ -125,6 +128,7 @@ namespace Bohrium.Tools.BDDManagementTool.WebApp
         {
             Container.RegisterInstance<IDataContext>(new XmlDataContext(HttpContext.Current.Server.MapPath("~/App_Data/")), new ContainerControlledLifetimeManager());
 
+            Container.RegisterType<ISearchRepository, SearchRepository>();
             Container.RegisterType<ServicesBootstrap, ServicesBootstrap>(new ContainerControlledLifetimeManager());
 
             Container.Resolve<ServicesBootstrap>().Configure();

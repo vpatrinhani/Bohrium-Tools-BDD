@@ -1,17 +1,13 @@
-﻿using System;
+﻿using Bohrium.Tools.BDDManagementTool.Data.Entities;
+using Bohrium.Tools.BDDManagementTool.Data.XML.Entities;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Caching;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
-using System.IO;
-using System.Configuration;
-using Bohrium.Tools.BDDManagementTool.Data.Entities;
 
-namespace Bohrium.Tools.BDDManagementTool.Data
+namespace Bohrium.Tools.BDDManagementTool.Data.XML
 {
     /// <summary>
     /// Xml Data Context to provide data from XML files.
@@ -20,25 +16,25 @@ namespace Bohrium.Tools.BDDManagementTool.Data
     {
         #region [Properties]
 
-        public virtual IQueryable<FeatureEntity> Features { get; private set; }
+        public virtual IQueryable<IFeatureEntity> Features { get; private set; }
 
-        public virtual IQueryable<ScenarioEntity> Scenarios { get; private set; }
+        public virtual IQueryable<IScenarioEntity> Scenarios { get; private set; }
 
-        public virtual IQueryable<StatementEntity> Statements { get; private set; }
+        public virtual IQueryable<IStatementEntity> Statements { get; private set; }
 
-        public virtual IQueryable<StepDefinitionEntity> StepDefinitions { get; private set; }
+        public virtual IQueryable<IStepDefinitionEntity> StepDefinitions { get; private set; }
 
-        public virtual IQueryable<StepDefinitionTypeEntity> StepDefinitionTypes { get; private set; }
+        public virtual IQueryable<IStepDefinitionTypeEntity> StepDefinitionTypes { get; private set; }
 
-        public virtual IQueryable<TableParameterEntity> Tables { get; private set; }
+        public virtual IQueryable<ITableParameterEntity> Tables { get; private set; }
 
-        public virtual IQueryable<TableColumnEntity> TableColumns { get; private set; }
+        public virtual IQueryable<ITableColumnEntity> TableColumns { get; private set; }
 
-        public virtual IQueryable<TableRowEntity> TableRows { get; private set; }
+        public virtual IQueryable<ITableRowEntity> TableRows { get; private set; }
 
-        public virtual IQueryable<TableCellEntity> TableCells { get; private set; }
+        public virtual IQueryable<ITableCellEntity> TableCells { get; private set; }
 
-        #endregion
+        #endregion [Properties]
 
         #region [.ctor]
 
@@ -55,10 +51,10 @@ namespace Bohrium.Tools.BDDManagementTool.Data
             Init();
         }
 
-        #endregion
+        #endregion [.ctor]
 
         #region [Methods]
-        
+
         private IEnumerable<CachedContentFile> InitCache()
         {
             ObjectCache cache = MemoryCache.Default;
@@ -83,9 +79,9 @@ namespace Bohrium.Tools.BDDManagementTool.Data
                     {
                         throw new SpecFlowDataNotFoundException();
                     }
-                    
+
                     policy.ChangeMonitors.Add(new HostFileChangeMonitor(xmlFiles.Select(x => x.Path).ToList()));
-                    
+
                     cache.Set(KEY, xmlFiles, policy);
                 }
             }
@@ -100,15 +96,15 @@ namespace Bohrium.Tools.BDDManagementTool.Data
 
         private void FetchObjects()
         {
-            var tempFeaturesEntities = new List<FeatureEntity>();
-            var tempScenariosEntities = new List<ScenarioEntity>();
-            var tempStatementEntities = new List<StatementEntity>();
-            var tempStepDefinitionEntities = new List<StepDefinitionEntity>();
-            var tempStepDefinitionTypesEntities = new List<StepDefinitionTypeEntity>();
-            var tempTableEntities = new List<TableParameterEntity>();
-            var tempTableColumnEntities = new List<TableColumnEntity>();
-            var tempTableRowEntities = new List<TableRowEntity>();
-            var tempTableCellEntities = new List<TableCellEntity>();
+            var tempFeaturesEntities = new List<IFeatureEntity>();
+            var tempScenariosEntities = new List<IScenarioEntity>();
+            var tempStatementEntities = new List<IStatementEntity>();
+            var tempStepDefinitionEntities = new List<IStepDefinitionEntity>();
+            var tempStepDefinitionTypesEntities = new List<IStepDefinitionTypeEntity>();
+            var tempTableEntities = new List<ITableParameterEntity>();
+            var tempTableColumnEntities = new List<ITableColumnEntity>();
+            var tempTableRowEntities = new List<ITableRowEntity>();
+            var tempTableCellEntities = new List<ITableCellEntity>();
 
             foreach (var item in CachedFiles.AsParallel())
             {
@@ -223,7 +219,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data
                         }
                     }
 
-                    #endregion
+                    #endregion [Features]
 
                     #region [Scenarios/Statements/Tables]
 
@@ -327,7 +323,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data
                         }
                     }
 
-                    #endregion
+                    #endregion [Scenarios/Statements/Tables]
 
                     #region [StepDefinition]
 
@@ -366,7 +362,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data
                         }
                     }
 
-                    #endregion
+                    #endregion [StepDefinition]
                 }
             }
 
@@ -407,7 +403,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data
             foreach (var stepDefinitionTypeEntity in tempStepDefinitionTypesEntities.AsParallel())
                 stepDefinitionTypeEntity.StepDefinition = tempStepDefinitionEntities.FirstOrDefault(x => x.Id == stepDefinitionTypeEntity.Id);
 
-            #endregion
+            #endregion [Join types for navigation]
 
             this.Features = tempFeaturesEntities.AsQueryable();
             this.Scenarios = tempScenariosEntities.AsQueryable();
@@ -429,7 +425,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data
             FetchObjects();
         }
 
-        #endregion
+        #endregion [Methods]
 
         private string FilePath { get; set; }
 

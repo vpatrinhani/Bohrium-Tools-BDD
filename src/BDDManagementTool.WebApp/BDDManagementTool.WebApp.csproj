@@ -239,6 +239,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BDDManagementTool.Data.XML\BDDManagementTool.Data.XML.csproj">
+      <Project>{275ede08-98c6-4738-a5cc-f1a4346891ca}</Project>
+      <Name>BDDManagementTool.Data.XML</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BDDManagementTool.Data\BDDManagementTool.Constraints\BDDManagementTool.Constraints.csproj">
       <Project>{017c8f8d-ca5d-4cf0-990b-56ba9e947d60}</Project>
       <Name>BDDManagementTool.Constraints</Name>
