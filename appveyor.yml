@@ -2,6 +2,10 @@ version: 1.0.0.{build}
 configuration: Release
 platform: Any CPU
 
+branches:
+  only:
+  - master
+
 build_script:
 - msbuild "Bohrium.targets" /t:clean /v:n /maxcpucount /nodeReuse:false
 - msbuild "Bohrium.Tools.SpecflowReportTool.msbuild" /t:compile /property:Configuration="Debug" /v:n /maxcpucount /nodeReuse:false
