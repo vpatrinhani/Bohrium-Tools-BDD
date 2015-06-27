@@ -20,7 +20,7 @@
     </PropertyGroup>
 
     <!-- NuGet packaging -->
-    <Exec WorkingDirectory="$(NugetToolFolder)" Command="nuget.exe Pack -version $(MajorMinorVersionBohriumCore).$(CIBuildNumber).0 $(NuspecFilesFolder)\Bohrium.Tools.SpecflowReportTool.nuspec /o $(DeployArtifactsFolder)" />
+    <Exec WorkingDirectory="$(NugetToolFolder)" Command="nuget.exe Pack -version $(MajorMinorVersionBohriumCore).$(CI_BUILD_NUMBER).0 $(NuspecFilesFolder)\Bohrium.Tools.SpecflowReportTool.nuspec /o $(DeployArtifactsFolder)" />
   </Target>  
   
   <Target Name="deploy-internal">

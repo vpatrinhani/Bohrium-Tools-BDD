@@ -12,7 +12,7 @@
 
     <PatternMajorMinorVersion>(\d+)\.(\d+)</PatternMajorMinorVersion>
 
-    <CIBuildNumber Condition=" '$(CIBuildNumber)' == '' ">0</CIBuildNumber>
+    <CI_BUILD_NUMBER Condition=" '$(CI_BUILD_NUMBER)' == '' ">0</CI_BUILD_NUMBER>
   </PropertyGroup>
 
   <Import Project="$(MSBuildProjectDirectory)\packages\MSBuild.Extension.Pack.1.6.0\build\net40\MSBuild.Extension.Pack.targets" />
