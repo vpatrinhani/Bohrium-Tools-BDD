@@ -2,11 +2,14 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <BohriumBuildTargetSolution>Bohrium.Tools.SpecflowReportTool.sln</BohriumBuildTargetSolution>
+	
+	<NugetServerUrl>https://www.myget.org/F/bohrium-tools/api/v2/package</NugetServerUrl>
+	<NugetAPIKey>8b646fdb-9eb3-4f4c-a517-2ff974a9633d</NugetAPIKey>
   </PropertyGroup>
 
   <Import Project="$(MSBuildProjectDirectory)\Bohrium.targets" />
 
-  <Target Name="deploy-generate-packages">
+  <Target Name="deploy-packages-internal">
 
     <GetAssemblyIdentity AssemblyFiles="$(MSBuildProjectDirectory)\src\SpecflowReportTool\bin\Release\Bohrium.Tools.SpecflowReportTool.exe">
       <Output TaskParameter="Assemblies" ItemName="BohriumCoreAssemblyInfo"/>
@@ -19,4 +22,16 @@
     <!-- NuGet packaging -->
     <Exec WorkingDirectory="$(NugetToolFolder)" Command="nuget.exe Pack -version $(MajorMinorVersionBohriumCore).$(CIBuildNumber).0 $(NuspecFilesFolder)\Bohrium.Tools.SpecflowReportTool.nuspec /o $(DeployArtifactsFolder)" />
   </Target>  
+  
+  <Target Name="deploy-internal">
+
+    <ItemGroup>
+      <DeployPackages Include="$(DeployArtifactsFolder)\**\*.nupkg" />
+    </ItemGroup>
+
+    <!-- NuGet pushing -->
+    <Exec WorkingDirectory="$(NugetToolFolder)" Command="nuget.exe push %(DeployPackages.FullPath) $(NugetAPIKey) -Source $(NugetServerUrl)" />
+
+  </Target>
+
 </Project>

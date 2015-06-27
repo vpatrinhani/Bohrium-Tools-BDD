@@ -6,7 +6,7 @@
 
   <Import Project="$(MSBuildProjectDirectory)\Bohrium.targets" />
  
-  <Target Name="deploy-generate-packages">
+  <Target Name="deploy-packages-internal">
 
     <GetAssemblyIdentity AssemblyFiles="$(MSBuildProjectDirectory)\src\BDDManagementTool.WebApp\bin\Bohrium.Tools.BDDManagementTool.WebApp.dll">
       <Output TaskParameter="Assemblies" ItemName="BohriumCoreAssemblyInfo"/>

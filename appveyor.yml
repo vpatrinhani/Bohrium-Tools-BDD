@@ -21,11 +21,5 @@ after_test:
 artifacts:
 - path: build\DeployArtifacts\*.nupkg
 
-deploy:
-- provider: NuGet
-  server: https://www.myget.org/F/bohrium-tools/api/v2/package
-  api_key:
-    secure: 8b646fdb-9eb3-4f4c-a517-2ff974a9633d
-  skip_symbols: true
-  on:
-    branch: master
+deploy_script:
+- msbuild "Bohrium.Tools.SpecflowReportTool.msbuild" /t:deploy /property:CI_BUILD_NUMBER="%APPVEYOR_BUILD_NUMBER%" /v:n /maxcpucount /nodeReuse:false
