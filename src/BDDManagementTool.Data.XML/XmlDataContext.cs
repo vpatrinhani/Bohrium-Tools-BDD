@@ -1,5 +1,4 @@
-﻿using Bohrium.Tools.BDDManagementTool.Data.Entities;
-using Bohrium.Tools.BDDManagementTool.Data.XML.Entities;
+﻿using Bohrium.Tools.BDDManagementTool.Data.XML.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,23 +15,23 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
     {
         #region [Properties]
 
-        public virtual IQueryable<IFeatureEntity> Features { get; private set; }
+        public virtual IQueryable<Feature> Features { get; private set; }
 
-        public virtual IQueryable<IScenarioEntity> Scenarios { get; private set; }
+        public virtual IQueryable<Scenario> Scenarios { get; private set; }
 
-        public virtual IQueryable<IStatementEntity> Statements { get; private set; }
+        public virtual IQueryable<Statement> Statements { get; private set; }
 
-        public virtual IQueryable<IStepDefinitionEntity> StepDefinitions { get; private set; }
+        public virtual IQueryable<StepDefinition> StepDefinitions { get; private set; }
 
-        public virtual IQueryable<IStepDefinitionTypeEntity> StepDefinitionTypes { get; private set; }
+        public virtual IQueryable<StepDefinitionType> StepDefinitionTypes { get; private set; }
 
-        public virtual IQueryable<ITableParameterEntity> Tables { get; private set; }
+        public virtual IQueryable<TableParameter> Tables { get; private set; }
 
-        public virtual IQueryable<ITableColumnEntity> TableColumns { get; private set; }
+        public virtual IQueryable<TableColumn> TableColumns { get; private set; }
 
-        public virtual IQueryable<ITableRowEntity> TableRows { get; private set; }
+        public virtual IQueryable<TableRow> TableRows { get; private set; }
 
-        public virtual IQueryable<ITableCellEntity> TableCells { get; private set; }
+        public virtual IQueryable<TableCell> TableCells { get; private set; }
 
         #endregion [Properties]
 
@@ -96,15 +95,15 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
 
         private void FetchObjects()
         {
-            var tempFeaturesEntities = new List<IFeatureEntity>();
-            var tempScenariosEntities = new List<IScenarioEntity>();
-            var tempStatementEntities = new List<IStatementEntity>();
-            var tempStepDefinitionEntities = new List<IStepDefinitionEntity>();
-            var tempStepDefinitionTypesEntities = new List<IStepDefinitionTypeEntity>();
-            var tempTableEntities = new List<ITableParameterEntity>();
-            var tempTableColumnEntities = new List<ITableColumnEntity>();
-            var tempTableRowEntities = new List<ITableRowEntity>();
-            var tempTableCellEntities = new List<ITableCellEntity>();
+            var tempFeaturesEntities = new List<Feature>();
+            var tempScenariosEntities = new List<Scenario>();
+            var tempStatementEntities = new List<Statement>();
+            var tempStepDefinitionEntities = new List<StepDefinition>();
+            var tempStepDefinitionTypesEntities = new List<StepDefinitionType>();
+            var tempTableEntities = new List<TableParameter>();
+            var tempTableColumnEntities = new List<TableColumn>();
+            var tempTableRowEntities = new List<TableRow>();
+            var tempTableCellEntities = new List<TableCell>();
 
             foreach (var item in CachedFiles.AsParallel())
             {
@@ -119,7 +118,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                     if (xDocument.Root.Elements("Features").Any())
                     {
                         var featuresQuery = from feature in xDocument.Root.Descendants("Feature")
-                                            select new FeatureEntity()
+                                            select new Feature()
                                             {
                                                 ObjectId = Guid.Parse(feature.Attribute("ObjectId").Value),
                                                 Description = feature.Attribute("Description").Value,
@@ -135,7 +134,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
 
                             foreach (var statementNode in backgroundNode.Descendants("Statements").Elements("Statement"))
                             {
-                                var statementEntity = new StatementEntity();
+                                var statementEntity = new Statement();
                                 statementEntity.ObjectId = Guid.Parse(statementNode.Attribute("ObjectId").Value);
                                 statementEntity.Description = statementNode.Attribute("Statement").Value;
                                 statementEntity.Keyword = statementNode.Attribute("Keyword").Value;
@@ -155,7 +154,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                     {
                                         foreach (var stepDefinitionTypeReferenceNode in typeReferenceNode.Descendants("StepDefinitionTypeReference"))
                                         {
-                                            var stepDefinitionTypeEntity = new StepDefinitionTypeEntity();
+                                            var stepDefinitionTypeEntity = new StepDefinitionType();
                                             stepDefinitionTypeEntity.ObjectId = Guid.Parse(stepDefinitionTypeReferenceNode.Attribute("StepDefinitionTypeId").Value);
 
                                             statementEntity.StepDefinitionTypes.Add(stepDefinitionTypeEntity);
@@ -165,7 +164,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
 
                                 foreach (var tableParameterNode in statementNode.Elements("TableParameter"))
                                 {
-                                    var tableEntity = new TableParameterEntity();
+                                    var tableEntity = new TableParameter();
                                     tableEntity.ObjectId = Guid.Parse(tableParameterNode.Attribute("ObjectId").Value);
                                     tableEntity.StatementId = statementEntity.ObjectId;
 
@@ -174,7 +173,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                     {
                                         foreach (var columnNode in headerNode.Element("Columns").Elements("Column"))
                                         {
-                                            var columnEntity = new TableColumnEntity();
+                                            var columnEntity = new TableColumn();
                                             columnEntity.ObjectId = Guid.Parse(columnNode.Attribute("ObjectId").Value);
                                             columnEntity.Value = columnNode.Attribute("Value").Value;
 
@@ -189,11 +188,11 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                     {
                                         foreach (var rowNode in rowsNode.Elements("Row"))
                                         {
-                                            var rowEntity = new TableRowEntity();
+                                            var rowEntity = new TableRow();
 
                                             foreach (var cellNode in rowNode.Elements("Cells").Elements("Cell"))
                                             {
-                                                var cellEntity = new TableCellEntity();
+                                                var cellEntity = new TableCell();
                                                 cellEntity.ObjectId = Guid.Parse(cellNode.Attribute("ObjectId").Value);
                                                 cellEntity.ColumnId = Guid.Parse(cellNode.Attribute("HeaderColumnId").Value);
                                                 cellEntity.Value = cellNode.Attribute("Value").Value;
@@ -228,7 +227,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                         // loop between scenarios
                         foreach (var scenarioNode in xDocument.Root.Descendants("Scenario").AsParallel())
                         {
-                            var scenarioEntity = new ScenarioEntity();
+                            var scenarioEntity = new Scenario();
                             scenarioEntity.ObjectId = Guid.Parse(scenarioNode.Attribute("ObjectId").Value);
                             scenarioEntity.FeatureObjectId = Guid.Parse(scenarioNode.Attribute("ParentFeature").Value);
                             scenarioEntity.Description = scenarioNode.Attribute("Description").Value;
@@ -237,7 +236,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                             // loop between statements
                             foreach (var statementNode in scenarioNode.Elements("Statements").Elements("Statement"))
                             {
-                                var statementEntity = new StatementEntity();
+                                var statementEntity = new Statement();
                                 statementEntity.ObjectId = Guid.Parse(statementNode.Attribute("ObjectId").Value);
                                 statementEntity.Description = statementNode.Attribute("Statement").Value;
                                 statementEntity.Keyword = statementNode.Attribute("Keyword").Value;
@@ -257,7 +256,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                     {
                                         foreach (var stepDefinitionTypeReferenceNode in typeReferenceNode.Descendants("StepDefinitionTypeReference"))
                                         {
-                                            var stepDefinitionTypeEntity = new StepDefinitionTypeEntity();
+                                            var stepDefinitionTypeEntity = new StepDefinitionType();
                                             stepDefinitionTypeEntity.ObjectId = Guid.Parse(stepDefinitionTypeReferenceNode.Attribute("StepDefinitionTypeId").Value);
 
                                             statementEntity.StepDefinitionTypes.Add(stepDefinitionTypeEntity);
@@ -267,7 +266,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
 
                                 foreach (var tableParameterNode in statementNode.Elements("TableParameter"))
                                 {
-                                    var tableEntity = new TableParameterEntity();
+                                    var tableEntity = new TableParameter();
                                     tableEntity.ObjectId = Guid.Parse(tableParameterNode.Attribute("ObjectId").Value);
                                     tableEntity.StatementId = statementEntity.ObjectId;
 
@@ -276,7 +275,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                     {
                                         foreach (var columnNode in headerNode.Element("Columns").Elements("Column"))
                                         {
-                                            var columnEntity = new TableColumnEntity();
+                                            var columnEntity = new TableColumn();
                                             columnEntity.ObjectId = Guid.Parse(columnNode.Attribute("ObjectId").Value);
                                             columnEntity.Value = columnNode.Attribute("Value").Value;
 
@@ -291,11 +290,11 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                     {
                                         foreach (var rowNode in rowsNode.Elements("Row"))
                                         {
-                                            var rowEntity = new TableRowEntity();
+                                            var rowEntity = new TableRow();
 
                                             foreach (var cellNode in rowNode.Elements("Cells").Elements("Cell"))
                                             {
-                                                var cellEntity = new TableCellEntity();
+                                                var cellEntity = new TableCell();
                                                 cellEntity.ObjectId = Guid.Parse(cellNode.Attribute("ObjectId").Value);
                                                 cellEntity.ColumnId = Guid.Parse(cellNode.Attribute("HeaderColumnId").Value);
                                                 cellEntity.Value = cellNode.Attribute("Value").Value;
@@ -333,7 +332,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                         {
                             foreach (var stepDefinitionNode in stepDefinitionsNode.Elements("StepDefinition").AsParallel())
                             {
-                                var stepDefinitionEntity = new StepDefinitionEntity();
+                                var stepDefinitionEntity = new StepDefinition();
                                 stepDefinitionEntity.ObjectId = Guid.Parse(stepDefinitionNode.Attribute("ObjectId").Value);
                                 stepDefinitionEntity.MethodName = stepDefinitionNode.Attribute("StepDefinitionMethodName").Value;
                                 stepDefinitionEntity.MethodSignature = stepDefinitionNode.Attribute("StepDefinitionMethodSignature").Value;
@@ -343,7 +342,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
                                 {
                                     foreach (var stepDefinitionTypeNode in stepDefinitionTypesNode.Elements("StepDefinitionType"))
                                     {
-                                        var stepDefinitionTypeEntity = new StepDefinitionTypeEntity();
+                                        var stepDefinitionTypeEntity = new StepDefinitionType();
 
                                         stepDefinitionTypeEntity.ObjectId = Guid.Parse(stepDefinitionTypeNode.Attribute("ObjectId").Value);
                                         stepDefinitionTypeEntity.StepDefinitionId = Guid.Parse(stepDefinitionTypeNode.Attribute("ParentStepDefinitionId").Value);
@@ -406,6 +405,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML
             #endregion [Join types for navigation]
 
             this.Features = tempFeaturesEntities.AsQueryable();
+
             this.Scenarios = tempScenariosEntities.AsQueryable();
             this.Statements = tempStatementEntities.AsQueryable();
 

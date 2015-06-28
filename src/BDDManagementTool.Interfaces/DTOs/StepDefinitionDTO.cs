@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Bohrium.Tools.BDDManagementTool.Constraints.Interfaces;
+using System;
 using System.Collections.Generic;
-using Bohrium.Tools.BDDManagementTool.Constraints.Interfaces;
 
 namespace Bohrium.Tools.BDDManagementTool.Interfaces.DTOs
 {

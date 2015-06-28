@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Bohrium.Tools.BDDManagementTool.Constraints.Interfaces;
+using System;
 using System.Collections.Generic;
-using Bohrium.Tools.BDDManagementTool.Constraints.Interfaces;
 
 namespace Bohrium.Tools.BDDManagementTool.Interfaces.DTOs
 {
@@ -14,7 +14,7 @@ namespace Bohrium.Tools.BDDManagementTool.Interfaces.DTOs
         public ScenarioDTO Scenario { get; set; }
         public Guid FeatureId { get; set; }
         public FeatureDTO Feature { get; set; }
-        public Guid StepDefinitionId { get; set; } 
+        public Guid StepDefinitionId { get; set; }
         public StepDefinitionDTO StepDefinition { get; set; }
         public List<StepDefinitionTypeDTO> StepDefinitionTypes { get; set; }
         public string MultilineTextParameter { get; set; }

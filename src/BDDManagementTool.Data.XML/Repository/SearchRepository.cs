@@ -1,9 +1,9 @@
-﻿using Bohrium.Tools.BDDManagementTool.Constraints.Enumerations;
+﻿using AutoMapper;
+using Bohrium.Tools.BDDManagementTool.Constraints.Enumerations;
 using Bohrium.Tools.BDDManagementTool.Data.Entities;
 using Bohrium.Tools.BDDManagementTool.Data.Infrasctructure;
 using Bohrium.Tools.BDDManagementTool.Data.Repository;
 using Bohrium.Tools.BDDManagementTool.Data.Repository.Params;
-using Bohrium.Tools.BDDManagementTool.Data.XML.Entities;
 using Bohrium.Tools.BDDManagementTool.Data.XML.Infrasctructure;
 using System;
 using System.Collections.Generic;
@@ -22,9 +22,9 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML.Repository
             if (UnitOfWork == null) throw new Exception("Must be XmlUnitOfWork");
         }
 
-        public virtual IEnumerable<IBaseEntity> Search(FilterRepoParam[] filters)
+        public virtual IEnumerable<BaseVO> Search(FilterRepoParam[] filters)
         {
-            List<IBaseEntity> returnedItems = new List<IBaseEntity>();
+            List<BaseVO> returnedItems = new List<BaseVO>();
             foreach (var filter in filters)
             {
                 filter.Text = filter.Text.ToLower();
@@ -67,54 +67,72 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML.Repository
             return returnedItems;
         }
 
-        public IFeatureEntity GetFeatureById(Guid id)
+        public FeatureVO GetFeatureById(Guid id)
         {
-            return UnitOfWork.Context.Features.FirstOrDefault(x => x.ObjectId == id);
+            var queryResult = UnitOfWork.Context.Features.FirstOrDefault(x => x.ObjectId == id);
+
+            return Mapper.Map<FeatureVO>(queryResult);
         }
 
-        public IScenarioEntity GetScenarioById(Guid id)
+        public ScenarioVO GetScenarioById(Guid id)
         {
-            return UnitOfWork.Context.Scenarios.FirstOrDefault(x => x.ObjectId == id);
+            var queryResult = UnitOfWork.Context.Scenarios.FirstOrDefault(x => x.ObjectId == id);
+
+            return Mapper.Map<ScenarioVO>(queryResult);
         }
 
-        public IStepDefinitionEntity GetStepDefinitionById(Guid id)
+        public StepDefinitionVO GetStepDefinitionById(Guid id)
         {
-            return UnitOfWork.Context.StepDefinitions.FirstOrDefault(x => x.ObjectId == id);
+            var queryResult = UnitOfWork.Context.StepDefinitions.FirstOrDefault(x => x.ObjectId == id);
+
+            return Mapper.Map<StepDefinitionVO>(queryResult);
         }
 
-        private IEnumerable<IBaseEntity> SearchByStepDefinition(string filterText)
+        private IEnumerable<BaseVO> SearchByStepDefinition(string filterText)
         {
-            return UnitOfWork.Context.StepDefinitions.Where(i => i.MethodName.ToLower().Contains(filterText)).ToList();
+            var queryResult = UnitOfWork.Context.StepDefinitions.Where(i => i.MethodName.ToLower().Contains(filterText)).ToList();
+
+            return Mapper.Map<IEnumerable<BaseVO>>(queryResult);
         }
 
-        private IEnumerable<IBaseEntity> SearchByScenario(string filterText)
+        private IEnumerable<BaseVO> SearchByScenario(string filterText)
         {
-            return UnitOfWork.Context.Scenarios.Where(i => i.Description.ToLower().Contains(filterText)).ToList();
+            var queryResult = UnitOfWork.Context.Scenarios.Where(i => i.Description.ToLower().Contains(filterText)).ToList();
+
+            return Mapper.Map<IEnumerable<BaseVO>>(queryResult);
         }
 
-        private IEnumerable<IFeatureEntity> SearchByFeature(string filterText)
+        private IEnumerable<FeatureVO> SearchByFeature(string filterText)
         {
-            return UnitOfWork.Context.Features.Where(i => i.Description.ToLower().Contains(filterText)).ToList();
+            var queryResult = UnitOfWork.Context.Features.Where(i => i.Description.ToLower().Contains(filterText)).ToList();
+
+            return Mapper.Map<IEnumerable<FeatureVO>>(queryResult);
         }
 
-        private IEnumerable<IStatementEntity> SearchByGiven(string filterText)
+        private IEnumerable<StatementVO> SearchByGiven(string filterText)
         {
-            return UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "given" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+            var queryResult = UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "given" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+
+            return Mapper.Map<IEnumerable<StatementVO>>(queryResult);
         }
 
-        private IEnumerable<IStatementEntity> SearchByWhen(string filterText)
+        private IEnumerable<StatementVO> SearchByWhen(string filterText)
         {
-            return UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "when" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+            var queryResult = UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "when" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+
+            return Mapper.Map<IEnumerable<StatementVO>>(queryResult);
         }
 
-        private IEnumerable<IStatementEntity> SearchByThen(string filterText)
+        private IEnumerable<StatementVO> SearchByThen(string filterText)
         {
-            return UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "then" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+            var queryResult = UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "then" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+
+            return Mapper.Map<IEnumerable<StatementVO>>(queryResult);
         }
 
-        private IEnumerable<IBaseEntity> SearchByTag(string filterText)
+        private IEnumerable<BaseVO> SearchByTag(string filterText)
         {
-            List<IBaseEntity> returnedItems = new List<IBaseEntity>();
+            List<BaseEntity> returnedItems = new List<BaseEntity>();
 
             //Load Features
             returnedItems.AddRange(UnitOfWork.Context.Features.Where(i => i.Tags.ToList<string>().Exists(s => s.ToLower().Contains(filterText))));
@@ -122,12 +140,12 @@ namespace Bohrium.Tools.BDDManagementTool.Data.XML.Repository
             //Load Scenarios
             returnedItems.AddRange(UnitOfWork.Context.Scenarios.Where(i => i.Tags.ToList<string>().Exists(s => s.ToLower().Contains(filterText))));
 
-            return returnedItems;
+            return Mapper.Map<IEnumerable<BaseVO>>(returnedItems);
         }
 
-        private IEnumerable<IBaseEntity> SearchByAll(string filterText)
+        private IEnumerable<BaseVO> SearchByAll(string filterText)
         {
-            List<IBaseEntity> returnedItems = new List<IBaseEntity>();
+            List<BaseVO> returnedItems = new List<BaseVO>();
 
             returnedItems.AddRange(SearchByScenario(filterText));
             returnedItems.AddRange(SearchByFeature(filterText));

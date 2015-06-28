@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Bohrium.Tools.BDDManagementTool.Constraints.Interfaces
+﻿namespace Bohrium.Tools.BDDManagementTool.Constraints.Interfaces
 {
     public interface ITaggable
     {

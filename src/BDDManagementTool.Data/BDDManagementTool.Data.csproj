@@ -40,17 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\SearchResults\FeatureSearchResultVO.cs" />
+    <Compile Include="Entities\SearchResults\ScenarioSearchResultVO.cs" />
+    <Compile Include="Entities\SearchResults\StatementSearchResultVO.cs" />
+    <Compile Include="Entities\SearchResults\StepDefinitionSearchResultVO.cs" />
+    <Compile Include="Infrastructure\BaseSearchResultVO.cs" />
     <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="Entities\IFeatureEntity.cs" />
-    <Compile Include="Entities\IScenarioEntity.cs" />
-    <Compile Include="Entities\IStatementEntity.cs" />
-    <Compile Include="Entities\IStepDefinitionEntity.cs" />
-    <Compile Include="Entities\IStepDefinitionTypeEntity.cs" />
-    <Compile Include="Entities\ITableCellEntity.cs" />
-    <Compile Include="Entities\ITableColumnEntity.cs" />
-    <Compile Include="Entities\ITableParameterEntity.cs" />
-    <Compile Include="Entities\ITableRowEntity.cs" />
-    <Compile Include="Infrastructure\IBaseEntity.cs" />
+    <Compile Include="Entities\FeatureVO.cs" />
+    <Compile Include="Entities\ScenarioVO.cs" />
+    <Compile Include="Entities\StatementVO.cs" />
+    <Compile Include="Entities\StepDefinitionVO.cs" />
+    <Compile Include="Entities\StepDefinitionTypeVO.cs" />
+    <Compile Include="Entities\TableCellVO.cs" />
+    <Compile Include="Entities\TableColumnVO.cs" />
+    <Compile Include="Entities\TableParameterVO.cs" />
+    <Compile Include="Entities\TableRowVO.cs" />
+    <Compile Include="Infrastructure\BaseVO.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Params\FilterRepoParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Bohrium.Tools.BDDManagementTool.Constraints.Enumerations;
-using Bohrium.Tools.BDDManagementTool.Data;
 using Bohrium.Tools.BDDManagementTool.Data.Repository;
 using Bohrium.Tools.BDDManagementTool.Data.Repository.Params;
 using Bohrium.Tools.BDDManagementTool.Interfaces;

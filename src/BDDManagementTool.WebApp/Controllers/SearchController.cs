@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Bohrium.Tools.BDDManagementTool.WebApp.Utils;
-using Bohrium.Tools.BDDManagementTool.WebApp.ViewModels;
+using Bohrium.Tools.BDDManagementTool.Presentation.ViewModels;
+using Bohrium.Tools.BDDManagementTool.Infrastructure.Core.Extensions;
 
 namespace BDDManagementTool.WebApp.Controllers
 {

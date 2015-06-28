@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using Bohrium.Tools.BDDManagementTool.Data.Entities;
+﻿using Bohrium.Tools.BDDManagementTool.Data.Entities;
 using Bohrium.Tools.BDDManagementTool.Data.Infrasctructure;
 using Bohrium.Tools.BDDManagementTool.Data.Repository.Params;
+using System;
+using System.Collections.Generic;
 
 namespace Bohrium.Tools.BDDManagementTool.Data.Repository
 {
     public interface ISearchRepository : IRepository
     {
-        IEnumerable<IBaseEntity> Search(FilterRepoParam[] filters);
+        IEnumerable<BaseVO> Search(FilterRepoParam[] filters);
 
-        IFeatureEntity GetFeatureById(Guid id);
-        IScenarioEntity GetScenarioById(Guid id);
-        IStepDefinitionEntity GetStepDefinitionById(Guid id);
+        FeatureVO GetFeatureById(Guid id);
+
+        ScenarioVO GetScenarioById(Guid id);
+
+        StepDefinitionVO GetStepDefinitionById(Guid id);
     }
 }

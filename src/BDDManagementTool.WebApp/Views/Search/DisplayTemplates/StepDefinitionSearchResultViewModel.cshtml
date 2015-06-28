@@ -1,4 +1,4 @@
-﻿@model Bohrium.Tools.BDDManagementTool.WebApp.ViewModels.StepDefinitionSearchResultViewModel
+﻿@model Bohrium.Tools.BDDManagementTool.Presentation.ViewModels.StepDefinitionSearchResultViewModel
 
 <div class="row top-buffer">
     <div class="panel panel-default stepDefinition-card-border">
@@ -8,7 +8,7 @@
                     <h5 title="@Html.DisplayFor(model => model.MethodName)">@Html.DisplayFor(model => model.MethodName)</h5>
                 </div>
                 <div class="col-md-1 text-right">
-                    <a href="@Url.Action("StepDefinition", "Search", new { id = Model.Id })" class="btn btn-default btn-sm">
+                    <a href="@Url.Action("StepDefinition", "Search", new { id = Model.ObjectId })" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-list"></span>
                     </a>
                 </div>

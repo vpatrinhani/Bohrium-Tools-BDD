@@ -1,5 +1,5 @@
-﻿using System;
-using Bohrium.Tools.BDDManagementTool.Constraints.Interfaces;
+﻿using Bohrium.Tools.BDDManagementTool.Constraints.Interfaces;
+using System;
 
 namespace Bohrium.Tools.BDDManagementTool.Interfaces.DTOs
 {
