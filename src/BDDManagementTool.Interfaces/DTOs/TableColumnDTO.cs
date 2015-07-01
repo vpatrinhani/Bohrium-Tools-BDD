@@ -5,7 +5,7 @@ namespace Bohrium.Tools.BDDManagementTool.Interfaces.DTOs
 {
     public class TableColumnDTO : BaseDTO, IIdentifiable
     {
-        public Guid ObjectId { get; set; }
-        public string Value { get; set; }
+        public Guid Id { get; set; }
+        public string Label { get; set; }
     }
 }

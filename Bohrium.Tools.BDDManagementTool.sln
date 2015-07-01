@@ -42,6 +42,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Global", "02 - Global"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{41E6EE4B-F492-4E23-A90F-F15B8BB279FF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07 - Tools", "07 - Tools", "{14FEC0AB-0855-439E-88F9-A950AFEAADA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDDManagementTool.EntityFrameworkImporterApp", "src\BDDManagementTool.EntityFrameworkImporterApp\BDDManagementTool.EntityFrameworkImporterApp.csproj", "{F394B8B1-73A3-4BDA-938F-F1E45A499360}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +88,10 @@ Global
 		{56AFEBEB-5CF0-4863-ABB3-69FD80491266}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56AFEBEB-5CF0-4863-ABB3-69FD80491266}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56AFEBEB-5CF0-4863-ABB3-69FD80491266}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F394B8B1-73A3-4BDA-938F-F1E45A499360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F394B8B1-73A3-4BDA-938F-F1E45A499360}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F394B8B1-73A3-4BDA-938F-F1E45A499360}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F394B8B1-73A3-4BDA-938F-F1E45A499360}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,5 +107,6 @@ Global
 		{3244BA27-23BF-4976-A72E-3FBF02FE737E} = {83E87709-8A2E-46C9-A490-F516BF15C67A}
 		{56AFEBEB-5CF0-4863-ABB3-69FD80491266} = {BA397B9A-9BA9-4E65-9DE6-914D06A3142E}
 		{41E6EE4B-F492-4E23-A90F-F15B8BB279FF} = {9EA28254-3A54-44AB-BC2C-C2351FDE9718}
+		{F394B8B1-73A3-4BDA-938F-F1E45A499360} = {14FEC0AB-0855-439E-88F9-A950AFEAADA1}
 	EndGlobalSection
 EndGlobal

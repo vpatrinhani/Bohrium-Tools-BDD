@@ -36,24 +36,24 @@ namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework
         {
             Mapper.CreateMap<Feature, FeatureVO>();
             Mapper.CreateMap<Scenario, ScenarioVO>();
-            Mapper.CreateMap<Statement, StatementVO>();
+            Mapper.CreateMap<Step, StatementVO>();
             Mapper.CreateMap<StepDefinition, StepDefinitionVO>();
             Mapper.CreateMap<StepDefinitionType, StepDefinitionTypeVO>();
-            Mapper.CreateMap<TableCell, TableCellVO>();
-            Mapper.CreateMap<TableColumn, TableColumnVO>();
+            Mapper.CreateMap<TableParameterCell, TableCellVO>();
+            Mapper.CreateMap<TableParameterColumn, TableColumnVO>();
             Mapper.CreateMap<TableParameter, TableParameterVO>();
-            Mapper.CreateMap<TableRow, TableRowVO>();
+            Mapper.CreateMap<TableParameterRow, TableRowVO>();
 
             Mapper.CreateMap<BaseEntity, BaseVO>()
                 .Include<Feature, FeatureVO>()
                 .Include<Scenario, ScenarioVO>()
-                .Include<Statement, StatementVO>()
+                .Include<Step, StatementVO>()
                 .Include<StepDefinition, StepDefinitionVO>()
                 .Include<StepDefinitionType, StepDefinitionTypeVO>()
-                .Include<TableCell, TableCellVO>()
-                .Include<TableColumn, TableColumnVO>()
+                .Include<TableParameterCell, TableCellVO>()
+                .Include<TableParameterColumn, TableColumnVO>()
                 .Include<TableParameter, TableParameterVO>()
-                .Include<TableRow, TableRowVO>();
+                .Include<TableParameterRow, TableRowVO>();
 
             Mapper.AssertConfigurationIsValid();
         }

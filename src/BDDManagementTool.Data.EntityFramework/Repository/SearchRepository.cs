@@ -11,15 +11,11 @@ using System.Linq;
 
 namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework.Repository
 {
-    public class SearchRepository : ISearchRepository
+    public class SearchRepository : BaseRepository, ISearchRepository
     {
-        protected UnitOfWork UnitOfWork { get; private set; }
-
         public SearchRepository(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
-            UnitOfWork = unitOfWork as UnitOfWork;
-            // TODO: Typed exception
-            if (UnitOfWork == null) throw new Exception("Must be XmlUnitOfWork");
         }
 
         public virtual IEnumerable<BaseVO> Search(FilterRepoParam[] filters)
@@ -69,21 +65,21 @@ namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework.Repository
 
         public FeatureVO GetFeatureById(Guid id)
         {
-            var queryResult = UnitOfWork.Context.Features.FirstOrDefault(x => x.ObjectId == id);
+            var queryResult = UnitOfWork.Context.Features.FirstOrDefault(x => x.Id == id);
 
             return Mapper.Map<FeatureVO>(queryResult);
         }
 
         public ScenarioVO GetScenarioById(Guid id)
         {
-            var queryResult = UnitOfWork.Context.Scenarios.FirstOrDefault(x => x.ObjectId == id);
+            var queryResult = UnitOfWork.Context.Scenarios.FirstOrDefault(x => x.Id == id);
 
             return Mapper.Map<ScenarioVO>(queryResult);
         }
 
         public StepDefinitionVO GetStepDefinitionById(Guid id)
         {
-            var queryResult = UnitOfWork.Context.StepDefinitions.FirstOrDefault(x => x.ObjectId == id);
+            var queryResult = UnitOfWork.Context.StepDefinitions.FirstOrDefault(x => x.Id == id);
 
             return Mapper.Map<StepDefinitionVO>(queryResult);
         }
@@ -111,21 +107,21 @@ namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework.Repository
 
         private IEnumerable<StatementVO> SearchByGiven(string filterText)
         {
-            var queryResult = UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "given" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+            var queryResult = UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "given" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexExpression.ToLower().Contains(filterText)))).ToList();
 
             return Mapper.Map<IEnumerable<StatementVO>>(queryResult);
         }
 
         private IEnumerable<StatementVO> SearchByWhen(string filterText)
         {
-            var queryResult = UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "when" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+            var queryResult = UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "when" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexExpression.ToLower().Contains(filterText)))).ToList();
 
             return Mapper.Map<IEnumerable<StatementVO>>(queryResult);
         }
 
         private IEnumerable<StatementVO> SearchByThen(string filterText)
         {
-            var queryResult = UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "then" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexStatement.ToLower().Contains(filterText)))).ToList();
+            var queryResult = UnitOfWork.Context.Statements.Where(i => i.Type.ToLower() == "then" && (i.Description.ToLower().Contains(filterText) || i.StepDefinitionTypes.Any(j => j.RegexExpression.ToLower().Contains(filterText)))).ToList();
 
             return Mapper.Map<IEnumerable<StatementVO>>(queryResult);
         }

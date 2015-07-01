@@ -7,7 +7,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
     public class StatementVO : BaseVO, IIdentifiable, ITypeable, IDescriptable
     {
-        public Guid ObjectId { get; set; }
+        public Guid Id { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
         public string Keyword { get; set; }

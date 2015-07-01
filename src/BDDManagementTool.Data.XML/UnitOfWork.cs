@@ -1,4 +1,5 @@
-﻿namespace Bohrium.Tools.BDDManagementTool.Data.XML
+﻿using System.Threading.Tasks;
+namespace Bohrium.Tools.BDDManagementTool.Data.XML
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -10,6 +11,10 @@
         }
 
         public void Commit()
+        {
+        }
+
+        public async void CommitAsync()
         {
         }
 

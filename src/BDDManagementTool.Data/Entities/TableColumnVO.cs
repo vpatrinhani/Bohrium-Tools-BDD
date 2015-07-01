@@ -6,7 +6,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
     public class TableColumnVO : BaseVO, IIdentifiable
     {
-        public Guid ObjectId { get; set; }
-        public string Value { get; set; }
+        public Guid Id { get; set; }
+        public string Label { get; set; }
     }
 }

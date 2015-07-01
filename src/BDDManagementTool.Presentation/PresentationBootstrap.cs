@@ -31,7 +31,7 @@ namespace Bohrium.Tools.BDDManagementTool.Presentation
         private void configureAutoMapper()
         {
             Mapper.CreateMap<BaseDTO, BaseSearchResultViewModel>()
-                .Ignore(viewModel => viewModel.ObjectId)
+                .Ignore(viewModel => viewModel.Id)
                 .Include<FeatureDTO, FeatureSearchResultViewModel>()
                 .Include<ScenarioDTO, ScenarioSearchResultViewModel>()
                 .Include<StatementDTO, StatementSearchResultViewModel>()
@@ -64,9 +64,9 @@ namespace Bohrium.Tools.BDDManagementTool.Presentation
                 .MapFrom(viewModel => viewModel.StepDefinitionTypes,
                     dto => dto.StepDefinitionTypes.Select(x => new StepDefinitionTypeViewModel()
                     {
-                        ObjectId = x.ObjectId,
+                        Id = x.Id,
                         CountUsages = x.CountUsages,
-                        RegexStatement = x.RegexStatement,
+                        RegexExpression = x.RegexExpression,
                         Type = x.Type
                     }).ToList());
 

@@ -7,8 +7,8 @@ namespace Bohrium.Tools.BDDManagementTool.Presentation.ViewModels
         [Display(Name = "Type")]
         public string Type { get; set; }
 
-        [Display(Name = "RegexStatement")]
-        public string RegexStatement { get; set; }
+        [Display(Name = "Regex Expression")]
+        public string RegexExpression { get; set; }
 
         [Display(Name = "Usages")]
         public int CountUsages { get; set; }
