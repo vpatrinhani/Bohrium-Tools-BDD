@@ -17,7 +17,7 @@ namespace BDDManagementTool.EntityFrameworkImporterApp
     class Program
     {
         private static string xsiNamespace = @"http://www.w3.org/2001/XMLSchema-instance";
-        private static string baseDataPath = @"C:\Development\Github\vpatrinhani\Bohrium-Tools-BDD\src\BDDManagementTool.WebApp\App_Data";
+        private static string baseDataPath = @"D:\Development\Github\vpatrinhani\Bohrium-Tools-BDD\bkp\App_Data";
 
         private static int featureCount = 0;
         private static int scenarioCount = 0;

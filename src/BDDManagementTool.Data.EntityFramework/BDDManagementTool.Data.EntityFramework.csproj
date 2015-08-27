@@ -71,6 +71,11 @@
     <Compile Include="BDDMgmtDbContext.cs" />
     <Compile Include="DataBootstrap.cs" />
     <Compile Include="Entities\Feature.cs" />
+    <Compile Include="Migrations\201508271912411_InitialCreate.cs" />
+    <Compile Include="Migrations\201508271912411_InitialCreate.Designer.cs">
+      <DependentUpon>201508271912411_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\Entities\FeatureRepository.cs" />
     <Compile Include="Repository\Entities\ScenarioRepository.cs" />
@@ -104,6 +109,11 @@
       <Project>{1fcd99be-56f8-4e8f-a291-9e3b2c300cec}</Project>
       <Name>BDDManagementTool.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201508271912411_InitialCreate.resx">
+      <DependentUpon>201508271912411_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

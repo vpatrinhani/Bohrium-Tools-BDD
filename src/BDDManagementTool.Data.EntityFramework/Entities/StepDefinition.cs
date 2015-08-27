@@ -9,6 +9,6 @@ namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework.Entities
         public string MethodName { get; set; }
         public string MethodSignature { get; set; }
         public int CountUsages { get; set; }
-        public virtual IList<StepDefinitionType> StepDefinitionTypes { get; set; }
+        public virtual ICollection<StepDefinitionType> StepDefinitionTypes { get; set; }
     }
 }

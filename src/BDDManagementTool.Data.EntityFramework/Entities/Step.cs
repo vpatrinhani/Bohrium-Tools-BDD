@@ -19,7 +19,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework.Entities
         [NotMapped]
         public string MultilineTextParameter { get; set; }
         [NotMapped]
-        public virtual IList<StepDefinitionType> StepDefinitionTypes { get; set; }
-        public virtual IList<TableParameter> TableParameters { get; set; }
+        public virtual ICollection<StepDefinitionType> StepDefinitionTypes { get; set; }
+        public virtual ICollection<TableParameter> TableParameters { get; set; }
     }
 }

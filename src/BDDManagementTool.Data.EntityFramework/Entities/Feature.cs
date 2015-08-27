@@ -8,10 +8,10 @@ namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework.Entities
     public class Feature : BaseEntity
     {
         public string Description { get; set; }
-        public virtual IList<Scenario> Scenarios { get; set; }
+        public virtual ICollection<Scenario> Scenarios { get; set; }
         [NotMapped]
         public string[] Tags { get; set; }
         [NotMapped]
-        public virtual IList<Step> Background { get; set; }
+        public virtual ICollection<Step> Background { get; set; }
     }
 }

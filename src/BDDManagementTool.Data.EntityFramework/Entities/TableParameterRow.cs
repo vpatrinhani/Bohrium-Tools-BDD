@@ -7,6 +7,6 @@ namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework.Entities
     public class TableParameterRow : BaseEntity
     {
         public Guid TableParameterId { get; set; }
-        public virtual IList<TableParameterCell> Cells { get; set; }
+        public virtual ICollection<TableParameterCell> Cells { get; set; }
     }
 }
