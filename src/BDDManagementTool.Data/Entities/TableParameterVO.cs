@@ -6,7 +6,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Entities
 {
     public class TableParameterVO : BaseVO
     {
-        public Guid ObjectId { get; set; }
+        public Guid Id { get; set; }
         public Guid StatementId { get; set; }
         public StatementVO Statement { get; set; }
         public IList<TableColumnVO> Columns { get; set; }

@@ -18,7 +18,6 @@ namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework.Entities
         public virtual Feature Feature { get; set; }
         [NotMapped]
         public string MultilineTextParameter { get; set; }
-        [NotMapped]
         public virtual ICollection<StepDefinitionType> StepDefinitionTypes { get; set; }
         public virtual ICollection<TableParameter> TableParameters { get; set; }
     }

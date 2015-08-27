@@ -71,9 +71,9 @@
     <Compile Include="BDDMgmtDbContext.cs" />
     <Compile Include="DataBootstrap.cs" />
     <Compile Include="Entities\Feature.cs" />
-    <Compile Include="Migrations\201508271912411_InitialCreate.cs" />
-    <Compile Include="Migrations\201508271912411_InitialCreate.Designer.cs">
-      <DependentUpon>201508271912411_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201508271950145_InitialCreate.cs" />
+    <Compile Include="Migrations\201508271950145_InitialCreate.Designer.cs">
+      <DependentUpon>201508271950145_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
@@ -111,8 +111,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201508271912411_InitialCreate.resx">
-      <DependentUpon>201508271912411_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201508271950145_InitialCreate.resx">
+      <DependentUpon>201508271950145_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

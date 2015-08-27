@@ -10,7 +10,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.Entities
         public Guid Id { get; set; }
         public string Description { get; set; }
         public string[] Tags { get; set; }
-        public Guid FeatureObjectId { get; set; }
+        public Guid FeatureId { get; set; }
         public FeatureVO Feature { get; set; }
         public IList<StatementVO> Statements { get; set; }
     }

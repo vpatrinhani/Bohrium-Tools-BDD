@@ -42,7 +42,7 @@ namespace Bohrium.Tools.BDDManagementTool.Presentation.ViewModels
 
     public class TableColumnViewModel
     {
-        public Guid ObjectId { get; set; }
+        public Guid Id { get; set; }
 
         public string Label { get; set; }
     }

@@ -13,9 +13,9 @@ namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework
             this.Configuration.ProxyCreationEnabled = true;
         }
 
-        public IList<Feature> Features { get; set; }
-        public IList<Scenario> Scenarios { get; set; }
-        public IList<Step> Statements { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Scenario> Scenarios { get; set; }
+        public DbSet<Step> Statements { get; set; }
         public DbSet<StepDefinition> StepDefinitions { get; set; }
         public DbSet<StepDefinitionType> StepDefinitionTypes { get; set; }
         public DbSet<TableParameter> Tables { get; set; }

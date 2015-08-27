@@ -39,9 +39,12 @@ namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework
             Mapper.CreateMap<Step, StatementVO>();
             Mapper.CreateMap<StepDefinition, StepDefinitionVO>();
             Mapper.CreateMap<StepDefinitionType, StepDefinitionTypeVO>();
-            Mapper.CreateMap<TableParameterCell, TableCellVO>();
+            Mapper.CreateMap<TableParameterCell, TableCellVO>()
+                .ForMember(t => t.ColumnId, cfg => cfg.MapFrom(s => s.TableParameterColumnId));
             Mapper.CreateMap<TableParameterColumn, TableColumnVO>();
-            Mapper.CreateMap<TableParameter, TableParameterVO>();
+            Mapper.CreateMap<TableParameter, TableParameterVO>()
+                .ForMember(t => t.StatementId, cfg => cfg.MapFrom(s => s.StepId))
+                .ForMember(t => t.Statement, cfg => cfg.MapFrom(s => s.Step));
             Mapper.CreateMap<TableParameterRow, TableRowVO>();
 
             Mapper.CreateMap<BaseEntity, BaseVO>()

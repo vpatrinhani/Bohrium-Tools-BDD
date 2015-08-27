@@ -13,7 +13,7 @@ namespace Bohrium.Tools.BDDManagementTool.Data.EntityFramework.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201508271912411_InitialCreate"; }
+            get { return "201508271950145_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
